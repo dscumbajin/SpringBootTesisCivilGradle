@@ -20,13 +20,23 @@ public interface BienesRepository extends JpaRepository<Bien, Integer> {
 
 	// @Query( value = "SELECT * FROM BIENES WHERE ALTA = ?1", nativeQuery = true)
 	@Query(value = "SELECT * FROM Bienes b WHERE b.alta like %:input% or b.anterior like %:input%"
-			+ " or b.serie like %:input% or b.descripcion like %:input%", nativeQuery = true)
+			+ " or b.serie like %:input% or b.descripcion like %:input% ORDER BY garantia DESC", nativeQuery = true)
 	Page<Bien> findByInput(@Param("input") String input, Pageable page);
-
+	
 	public Bien findByAlta(String alta);
 
+	// valor repetido por alta nueva
+	boolean existsByAlta(String alta);
+
+	// valor repetido por alta anterior
+	boolean existsByAnterior(String anterior);
+	
+	// valor repetido por serie
+	boolean existsBySerie(String serie);
+	
 	// valor repetido por alta, anterior, serie
 	boolean existsByAltaAndAnteriorAndSerie(String alta, String anterior, String serie);
+	
 
 	// Lista de bienes que se pueden asignar
 	List<Bien> findByControl(String Control);

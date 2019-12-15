@@ -103,24 +103,18 @@ public class EstacionController {
 
 		} else {
 
-			if (!(servicioEstaciones.existeEstacion(ubicacion, lugar))) {
-
-				// Edición
-				if (!multiPart.isEmpty()) {
-					String nombreImagen = Utileria.guardarImagen(multiPart, request);
-					if (nombreImagen != null) { // La imagen si se subio
-						estacion.setImagen(nombreImagen); // Asignamos el nombre de la imagen
-					}
+			// Edición
+			if (!multiPart.isEmpty()) {
+				String nombreImagen = Utileria.guardarImagen(multiPart, request);
+				if (nombreImagen != null) { // La imagen si se subio
+					estacion.setImagen(nombreImagen); // Asignamos el nombre de la imagen
 				}
-				servicioEstaciones.insertar(estacion);
-				attributes.addFlashAttribute("mensaje", "El registro fue editado");
-				edicion = "";
-				return "redirect:/estaciones/indexPaginate";// redireccionamos a un nuevo formmulario
-
-			} else {
-				model.addAttribute("alerta", "Ya existe una: " + lugar + " en el: " + ubicacion);
-				return "estaciones/formEstaciones";
 			}
+			servicioEstaciones.insertar(estacion);
+			attributes.addFlashAttribute("mensaje", "El registro fue editado");
+			edicion = "";
+			return "redirect:/estaciones/indexPaginate";// redireccionamos a un nuevo formmulario
+
 		}
 
 	}

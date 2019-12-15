@@ -15,8 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,6 +32,7 @@ import uce.edu.ec.app.util.ExcelBuilderDetalle;
 import uce.edu.ec.app.util.PDFBuilderDetalle;
 
 @Controller
+@RequestMapping("")
 public class HomeController {
 
 	@Autowired
@@ -63,18 +64,18 @@ public class HomeController {
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@GetMapping(value = "/home")
 	public String goHome() {
 		return "home";
 	}
 
 	// regresa la lista de Estaciones a la pantalla home
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping(value = "/")
 	public String mostrarPrincipal(Model model) {
 		return "home";
 	}
 
-	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	@GetMapping(value = "/detail")
 	public String mostrarDetalle(Model model, @RequestParam("idEstacion") int idEstacion, Pageable page) {
 
 		Page<Bienes_Estaciones> bienes_Estaciones = serviceAsignaciones.buscarPorIdEstacion(idEstacion, page);
@@ -105,7 +106,7 @@ public class HomeController {
 		return "detalle";
 	}
 
-	@RequestMapping(value = "/personalizado")
+	@GetMapping(value = "/personalizado")
 	public String mostrarPeriodo() {
 		return "redirect:/detallePeriodoPaginate";
 	}
@@ -136,7 +137,7 @@ public class HomeController {
 
 	// Busqueda por fecha inicio and fin
 
-	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
+	@PostMapping(value = "/buscar")
 	public String buscarPeriodo(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate)
 			throws ParseException {
 		System.out.println("fecha inicio:" + startDate + " fecha fin:" + endDate);
@@ -177,7 +178,7 @@ public class HomeController {
 
 	}
 
-	@RequestMapping(value = "/cancel")
+	@GetMapping(value = "/cancel")
 	public String Cancelar() {
 		busqueda = "";
 		paginado = "";
@@ -185,7 +186,7 @@ public class HomeController {
 	}
 
 	// Busqueda por alta
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
+	@PostMapping(value = "/search")
 	public String buscar(@RequestParam("campo") String campo) {
 		System.out.println("alta: " + campo);
 		busqueda = "si";
@@ -208,12 +209,12 @@ public class HomeController {
 		return serviceNoticias.buscarUltimas();
 	}
 
-	@RequestMapping(value = "/about")
+	@GetMapping(value = "/about")
 	public String mostrarAcerca() {
 		return "acerca";
 	}
 
-	@RequestMapping(value = "/formLogin", method = RequestMethod.GET)
+	@GetMapping(value = "/formLogin")
 	public String mostrarLogin() {
 		return "formLogin";
 	}

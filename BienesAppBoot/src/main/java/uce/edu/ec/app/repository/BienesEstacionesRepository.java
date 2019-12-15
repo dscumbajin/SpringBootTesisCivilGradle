@@ -22,7 +22,7 @@ public interface BienesEstacionesRepository extends JpaRepository<Bienes_Estacio
 	List<Bienes_Estaciones> findByEstacion_Id(int id);
 
 	// Listar los bienes asignados mediante el id de la estacion //paginado
-	@Query(value = "SELECT * FROM BIENES_ESTACIONES WHERE ID_ESTACION = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM BIENES_ESTACIONES WHERE ID_ESTACION = ?1 ORDER BY ACTUALIZACION DESC", nativeQuery = true)
 	Page<Bienes_Estaciones> findByIdEstacion(@Param("ID_ESTACION") int id_estacion, Pageable page);
 
 	// Buscar los bienes que fueron cambiados en algun periodo //Paginado

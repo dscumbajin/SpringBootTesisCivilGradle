@@ -150,8 +150,8 @@ public class BienesController {
 	// Manejo de Errores
 	@PostMapping(value = "/save")
 	public String guardar(@ModelAttribute Bien bien, Model model, BindingResult result, RedirectAttributes attributes,
-			@RequestParam("alta") String alta, @RequestParam("anterior") String anterior,
-			@RequestParam("serie") String serie) {
+			@RequestParam(name = "alta", required = false) String alta, @RequestParam(name="anterior",required = false) String anterior,
+			@RequestParam(name = "serie", required = false) String serie) {
 
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
@@ -159,6 +159,7 @@ public class BienesController {
 		}
 
 		if (edicion == "") {
+			
 			if (serviceBienes.exiteRegistroPorAltaAnteriorSerie(alta, anterior, serie)) {
 				model.addAttribute("alerta", "Ya existe un registro con Alta Nueva: " + alta + " Alta Anterior: "
 						+ anterior + " Serie: " + serie);

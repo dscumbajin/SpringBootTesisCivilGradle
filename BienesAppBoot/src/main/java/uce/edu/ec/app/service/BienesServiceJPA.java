@@ -64,6 +64,21 @@ public class BienesServiceJPA implements IBienService {
 	public boolean exiteRegistroPorAltaAnteriorSerie(String alta, String anterior, String serie) {
 		return bienesRepo.existsByAltaAndAnteriorAndSerie(alta, anterior, serie);
 	}
+	
+	@Override
+	public boolean existeRegistroPorALta(String alta) {
+		return bienesRepo.existsByAlta(alta);
+	}
+
+	@Override
+	public boolean existeRegistroPorAnterior(String anterior) {
+		return bienesRepo.existsByAnterior(anterior);
+	}
+
+	@Override
+	public boolean existeRegistroPorSerie(String serie) {
+		return bienesRepo.existsBySerie(serie);
+	}
 
 	@Override
 	public List<Bien> sinAsignacion() {
