@@ -100,8 +100,15 @@ public class HomeController {
 		} else {
 			Page<Bienes_Estaciones> bienes_Estaciones = serviceAsignaciones
 					.buscarPorEstacion_IdAndBien_Alta(idEstacionB, token, page);
-			model.addAttribute("bienes_Estaciones", bienes_Estaciones);
-			busqueda = "";
+
+			if (bienes_Estaciones.isEmpty()) {
+				model.addAttribute("alerta", "No existe el registro con Alta Nueva: " +token);
+				busqueda = "";
+			} else {
+				model.addAttribute("bienes_Estaciones", bienes_Estaciones);
+				busqueda = "";
+			}
+
 		}
 		return "detalle";
 	}
@@ -128,9 +135,18 @@ public class HomeController {
 			model.addAttribute("estacion", serviceEstaciones.buscarPorId(idEstacionB));
 			Page<Bienes_Estaciones> bienes_Estaciones = serviceAsignaciones
 					.buscarCambiosPorPeriodoAndIdEstacion(idEstacionB, inicio, fin, page);
-			cambioPeriodoDetalle = bienes_Estaciones.getContent();
-			model.addAttribute("bienes_Estaciones", bienes_Estaciones);
-			System.out.println("Primer paginado: " + busqueda + paginado);
+
+			if (bienes_Estaciones.isEmpty()) {
+				// Mensaje de no encontrado
+				model.addAttribute("alerta", "No existen registros para el período comprendido entre: "
+						+ dateFormat.format(inicio) + " & " + dateFormat.format(fin));
+				busqueda = "";
+			} else {
+				cambioPeriodoDetalle = bienes_Estaciones.getContent();
+				model.addAttribute("bienes_Estaciones", bienes_Estaciones);
+				System.out.println("Primer paginado: " + busqueda + paginado);
+			}
+
 		}
 		return "detalleCambioPeriodo";
 	}

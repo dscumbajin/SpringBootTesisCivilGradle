@@ -66,8 +66,14 @@ public class EstacionController {
 			model.addAttribute("estaciones", lista);
 		} else {
 			Page<Estacion> lista = servicioEstaciones.buscarPorLugar(token, page);
-			model.addAttribute("estaciones", lista);
-			busqueda = "";
+			if (lista.isEmpty()) {
+				model.addAttribute("alerta", "No existe el registro con Lugar: "+token);
+				busqueda = "";
+			} else {
+				model.addAttribute("estaciones", lista);
+				busqueda = "";
+			}
+
 		}
 		return "estaciones/listEstaciones";
 	}
@@ -164,7 +170,7 @@ public class EstacionController {
 	// Busqueda por alta
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public String buscar(@RequestParam("inputLugar") String inputLugar) {
-		System.out.println("alta: " + inputLugar);
+		System.out.println("Lugar: " + inputLugar);
 		busqueda = "si";
 		token = inputLugar;
 		return "redirect:/estaciones/indexPaginate";

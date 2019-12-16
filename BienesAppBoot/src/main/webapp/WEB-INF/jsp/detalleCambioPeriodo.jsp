@@ -36,7 +36,13 @@
 <body>
 	<jsp:include page="includes/menu.jsp"></jsp:include>
 
+	<c:if test="${mensaje!=null}">
+		<div class='alert alert-success' role="alert">${mensaje}</div>
+	</c:if>
 
+	<c:if test="${alerta!=null}">
+		<div class='alert alert-danger' role="alert">${alerta}</div>
+	</c:if>
 
 	<!-- Marketing messaging -->
 	<div class="container marketing">

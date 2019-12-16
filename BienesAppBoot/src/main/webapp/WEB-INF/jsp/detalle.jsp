@@ -39,6 +39,13 @@
 
 	<div class="container theme-showcase" role="main">
 
+		<c:if test="${mensaje!=null}">
+			<div class='alert alert-success' role="alert">${mensaje}</div>
+		</c:if>
+
+		<c:if test="${alerta!=null}">
+			<div class='alert alert-danger' role="alert">${alerta}</div>
+		</c:if>
 		<!-- Marketing messaging -->
 		<div class="container marketing">
 

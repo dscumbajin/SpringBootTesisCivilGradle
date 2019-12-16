@@ -43,6 +43,10 @@
 			<div class='alert alert-success' role="alert">${mensaje}</div>
 		</c:if>
 
+		<c:if test="${alerta!=null}">
+			<div class='alert alert-danger' role="alert">${alerta}</div>
+		</c:if>
+
 		<a href="${urlCreate}" class="btn btn-primary" role="button"
 			title="Nueva Ubicacion">Nueva</a><br> <br>
 

@@ -94,8 +94,14 @@ public class BienesController {
 		} else {
 			// Formulario con registro buscado
 			Page<Bien> lista = serviceBienes.search(token, page);
-			model.addAttribute("bienes", lista);
-			busqueda = "";
+			if (lista.isEmpty()) {
+				model.addAttribute("alerta", "No existe el registro con Alta Nueva: " +token);
+				busqueda = "";
+			} else {
+				model.addAttribute("bienes", lista);
+				busqueda = "";
+			}
+
 		}
 
 		return "bienes/listBienes";
@@ -109,8 +115,18 @@ public class BienesController {
 			// Lista vacia
 		} else if (paginado == "si") {
 			Page<Bien> lista = serviceBienes.buscarPeriodo(inicio, fin, page);
-			model.addAttribute("bienes", lista);
-			bienesPorPeriodo = lista.getContent();
+			if (lista.isEmpty()) {
+				// Mensaje de no encontrado
+				model.addAttribute("alerta", "No existen registros para el período comprendido entre: "
+						+ dateFormat.format(inicio) + " & " + dateFormat.format(fin));
+				busqueda = "";
+
+			} else {
+				model.addAttribute("bienes", lista);
+				bienesPorPeriodo = lista.getContent();
+				busqueda = "";
+			}
+
 		}
 		return "bienes/listPeriodo";
 	}
@@ -150,7 +166,8 @@ public class BienesController {
 	// Manejo de Errores
 	@PostMapping(value = "/save")
 	public String guardar(@ModelAttribute Bien bien, Model model, BindingResult result, RedirectAttributes attributes,
-			@RequestParam(name = "alta", required = false) String alta, @RequestParam(name="anterior",required = false) String anterior,
+			@RequestParam(name = "alta", required = false) String alta,
+			@RequestParam(name = "anterior", required = false) String anterior,
 			@RequestParam(name = "serie", required = false) String serie) {
 
 		if (result.hasErrors()) {
@@ -159,7 +176,7 @@ public class BienesController {
 		}
 
 		if (edicion == "") {
-			
+
 			if (serviceBienes.exiteRegistroPorAltaAnteriorSerie(alta, anterior, serie)) {
 				model.addAttribute("alerta", "Ya existe un registro con Alta Nueva: " + alta + " Alta Anterior: "
 						+ anterior + " Serie: " + serie);

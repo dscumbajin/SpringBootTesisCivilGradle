@@ -66,8 +66,14 @@ public class BienesEstacionesController {
 
 		} else {
 			Page<Bienes_Estaciones> listaAsignaciones = servicioBienesEstaciones.buscarPorAltaBien(token, page);
-			model.addAttribute("asignaciones", listaAsignaciones);
-			busqueda = "";
+			if (listaAsignaciones.isEmpty()) {
+				model.addAttribute("alerta", "No existe el registro con Alta Nueva: " +token);
+				busqueda = "";
+			} else {
+				model.addAttribute("asignaciones", listaAsignaciones);
+				busqueda = "";
+			}	
+			
 		}
 		return "asignaciones/listAsignaciones";
 	}
