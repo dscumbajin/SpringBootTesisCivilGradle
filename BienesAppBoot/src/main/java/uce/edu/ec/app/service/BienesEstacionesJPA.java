@@ -64,7 +64,7 @@ public class BienesEstacionesJPA implements IBienes_Estaciones {
 
 	@Override
 	public Page<Bienes_Estaciones> buscarTodos(Pageable page) {
-		return bienesEstacionesRepo.findAll(page);
+		return bienesEstacionesRepo.findAllOrdenado(page);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class BienesEstacionesJPA implements IBienes_Estaciones {
 	@Override
 	public Page<Bienes_Estaciones> buscarCambiosPorPeriodoAndIdEstacion(int idEstacion, Date startDate, Date endDate,
 			Pageable page) {
-		return bienesEstacionesRepo.findByEstacion_IdAndActualizacionBetween(idEstacion, startDate, endDate, page);
+		return bienesEstacionesRepo.findByEstacion_IdAndActualizacionBetweenOrderByActualizacionDesc(idEstacion, startDate, endDate, page);
 	}
 
 	@Override

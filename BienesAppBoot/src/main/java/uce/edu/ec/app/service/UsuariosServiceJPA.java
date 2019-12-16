@@ -55,7 +55,7 @@ public class UsuariosServiceJPA implements IUsuariosService {
 
 	@Override
 	public Page<Usuario> buscarTodos(Pageable page) {
-		return usuariosRepo.findAll(page);
+		return usuariosRepo.findAllOrdenado(page);
 	}
 
 	@Override

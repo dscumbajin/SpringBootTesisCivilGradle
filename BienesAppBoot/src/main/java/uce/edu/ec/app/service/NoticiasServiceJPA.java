@@ -40,12 +40,6 @@ public class NoticiasServiceJPA implements INoticiasService {
 		noticiasRepo.deleteById(idNoticia);
 	}
 
-	// Spring 4.3
-//	@Override
-//	public Noticia buscarPorId(int idNoticia) {
-//		return noticiasRepo.findOne(idNoticia); 
-//	}
-
 	@Override
 	public Noticia buscarPorId(int idNoticia) {
 		Optional<Noticia> optional = noticiasRepo.findById(idNoticia);
@@ -62,7 +56,7 @@ public class NoticiasServiceJPA implements INoticiasService {
 
 	@Override
 	public Page<Noticia> buscarTodas(Pageable page) {
-		return noticiasRepo.findAll(page);
+		return noticiasRepo.findAllOrdenado(page);
 	}
 
 }

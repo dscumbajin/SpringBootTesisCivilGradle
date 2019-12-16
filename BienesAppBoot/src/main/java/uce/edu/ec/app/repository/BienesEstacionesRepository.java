@@ -26,8 +26,12 @@ public interface BienesEstacionesRepository extends JpaRepository<Bienes_Estacio
 	Page<Bienes_Estaciones> findByIdEstacion(@Param("ID_ESTACION") int id_estacion, Pageable page);
 
 	// Buscar los bienes que fueron cambiados en algun periodo //Paginado
-	Page<Bienes_Estaciones> findByEstacion_IdAndActualizacionBetween(int idEstacion, Date startDate, Date endDate,
-			Pageable page);
+	Page<Bienes_Estaciones> findByEstacion_IdAndActualizacionBetweenOrderByActualizacionDesc(int idEstacion,
+			Date startDate, Date endDate, Pageable page);
+
+	// Lista todas las asignaciones oredenados
+	@Query(value = "SELECT * FROM BIENES_ESTACIONES be, ESTACIONES e WHERE be.id_estacion = e.id  ORDER BY e.lugar DESC, be.registro DESC ", nativeQuery = true)
+	Page<Bienes_Estaciones> findAllOrdenado(Pageable page);
 
 	// Verificar si existe el registro por medio de los parametros idBien and
 	// idEstacion
@@ -35,8 +39,8 @@ public interface BienesEstacionesRepository extends JpaRepository<Bienes_Estacio
 
 	// Buscar por Alta nueva
 	Page<Bienes_Estaciones> findByBien_Alta(String alta, Pageable page);
-	
-	//Buscar registro por id de estacion and alta del bien //Paginado
+
+	// Buscar registro por id de estacion and alta del bien //Paginado
 	Page<Bienes_Estaciones> findByEstacion_IdAndBien_Alta(int idEstacion, String alta, Pageable page);
 
 }

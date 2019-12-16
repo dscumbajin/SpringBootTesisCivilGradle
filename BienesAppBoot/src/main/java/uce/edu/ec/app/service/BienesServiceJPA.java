@@ -46,7 +46,7 @@ public class BienesServiceJPA implements IBienService {
 
 	@Override
 	public Page<Bien> buscarTodas(Pageable page) {
-		return bienesRepo.findAll(page);
+		return bienesRepo.findAllOrdenado(page);
 	}
 
 	@Override

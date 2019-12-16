@@ -56,7 +56,7 @@ public class BannersServiceJPA implements IBannersService {
 
 	@Override
 	public Page<Banner> buscarTodos(Pageable page) {
-		return bannersRepo.findAll(page);
+		return bannersRepo.findAllOrdenado(page);
 	}
 
 }

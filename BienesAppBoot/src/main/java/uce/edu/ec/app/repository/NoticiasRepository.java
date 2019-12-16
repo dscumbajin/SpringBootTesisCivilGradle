@@ -2,7 +2,11 @@ package uce.edu.ec.app.repository;
 
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import uce.edu.ec.app.model.Noticia;
@@ -38,9 +42,12 @@ public interface NoticiasRepository extends JpaRepository<Noticia, Integer> {
 	List<Noticia> findByIdBetween(int n1, int n2);
 
 	// select * from Noticias where estatus = ? order by id desc limit 3
-	public List<Noticia> findTop3ByEstatusOrderByIdDesc(String estatus);
-	
-	public boolean existsByTitulo(String titulo);
+	List<Noticia> findTop3ByEstatusOrderByIdDesc(String estatus);
 
+	boolean existsByTitulo(String titulo);
+
+	// Lista notificaciones ordenadas por id
+	@Query(value = "SELECT * FROM NOTICIAS ORDER BY fecha DESC", nativeQuery = true)
+	Page<Noticia> findAllOrdenado(Pageable page);
 
 }

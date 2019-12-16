@@ -23,6 +23,10 @@ public interface BienesRepository extends JpaRepository<Bien, Integer> {
 			+ " or b.serie like %:input% or b.descripcion like %:input% ORDER BY garantia DESC", nativeQuery = true)
 	Page<Bien> findByInput(@Param("input") String input, Pageable page);
 	
+	//Lista todos los bienes oredenados por fecha de ingreso descendente
+	@Query( value = "SELECT * FROM BIENES b, DETALLES d WHERE b.id_detalle = d.id ORDER BY b.fecha_ingreso DESC", nativeQuery = true)
+	Page<Bien> findAllOrdenado(Pageable page);
+	
 	public Bien findByAlta(String alta);
 
 	// valor repetido por alta nueva

@@ -56,7 +56,7 @@ public class EstacionesServiceJPA implements IEstacionService {
 	@Override
 	public Page<Estacion> buscarTodos(Pageable page) {
 
-		return estacionesRepo.findAll(page);
+		return estacionesRepo.findAllOrdenado(page);
 	}
 
 	@Override

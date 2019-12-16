@@ -47,7 +47,6 @@
 			<table id="datos" class="table table-hover table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Id</th>
 						<th>Titulo</th>
 						<th>Fecha Publicacion</th>
 						<th>Nombre Archivo</th>
@@ -57,7 +56,6 @@
 				</thead>
 				<c:forEach items="${banners.content}" var="banner">
 					<tr>
-						<td>${banner.id}</td>
 						<td>${banner.titulo}</td>
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
 								value="${banner.fecha}" /></td>

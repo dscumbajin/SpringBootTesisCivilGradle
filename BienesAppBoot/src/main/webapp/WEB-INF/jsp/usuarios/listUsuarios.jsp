@@ -45,7 +45,6 @@
 				class="table table-hover table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Id</th>
 						<th>Nombres</th>
 						<th>Apellidos</th>
 						<th>Cuenta</th>
@@ -57,7 +56,6 @@
 				</thead>
 				<c:forEach items="${usuarios.content}" var="usuario">
 					<tr>
-						<td>${usuario.id}</td>
 						<td>${usuario.nombre}</td>
 						<td>${usuario.apellido}</td>
 						<td>${usuario.cuenta}</td>

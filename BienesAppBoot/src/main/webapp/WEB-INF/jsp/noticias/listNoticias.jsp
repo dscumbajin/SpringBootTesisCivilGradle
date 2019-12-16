@@ -48,7 +48,6 @@
 				class="table table-hover table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Id</th>
 						<th>Titulo</th>
 						<th>Fecha</th>
 						<th>Estatus</th>
@@ -57,7 +56,6 @@
 				</thead>
 				<c:forEach items="${noticias.content}" var="noticia">
 					<tr>
-						<td>${noticia.id}</td>
 						<td>${noticia.titulo}</td>
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
 								value="${noticia.fecha}" /></td>
