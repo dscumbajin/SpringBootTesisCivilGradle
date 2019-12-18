@@ -58,10 +58,9 @@
 						<form:hidden path="id" />
 
 						<form:input type="text" path="bien.alta" id="id_bien"
-							readonly="readonly" class="form-control" />
+							readonly="readonly" class="form-control" disabled="true"/>
 						<form:hidden path="bien.alta" />
-						<!--<form:select id="id_bien" path="bien.id" class="form-control"
-							items="${bienes}" itemLabel="alta" itemValue="id" /> -->
+						
 					</div>
 				</div>
 

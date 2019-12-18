@@ -206,13 +206,13 @@ public class BienesController {
 						.println("no existe " + serviceBienes.exiteRegistroPorAltaAnterior(alta, anterior));
 				if (serviceBienes.existeRegistroPorALta(alta)) {
 					model.addAttribute("alerta", "Ya existe un registro con Alta Nueva: " + alta);
-					return "bienes/formBien";
+					return "bienes/editBien";
 				} else if (serviceBienes.existeRegistroPorAnterior(anterior)) {
 					model.addAttribute("alerta", "Ya existe un registro con Alta Anterior: " + anterior);
-					return "bienes/formBien";
+					return "bienes/editBien";
 				} else {
 					model.addAttribute("alerta", "No existe el registro con Alta Nueva: " + alta + " y Alta Anterior: "+anterior+ " para editarlo");
-					return "bienes/formBien";
+					return "bienes/editBien";
 				}
 
 			}
@@ -226,7 +226,7 @@ public class BienesController {
 		Bien bien = serviceBienes.buscarPorId(idBien);
 		model.addAttribute("bien", bien);
 		edicion = "si";
-		return "bienes/formBien";
+		return "bienes/editBien";
 	}
 
 	// Eliminar por id
