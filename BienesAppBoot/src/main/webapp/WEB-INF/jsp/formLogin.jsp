@@ -60,8 +60,8 @@
 				Administracion</h3>
 			<label for="username" class="sr-only">
 				Usuario</label> <input type="text" id="username" name="username"
-				class="form-control" placeholder="Usuario" required autofocus
-				autocomplete="off"> <br> <label for="password"
+				class="form-control"  placeholder="Usuario" required autofocus
+				autocomplete="off" ><br> <label for="password"
 				class="sr-only">Contraseña</label> <input type="password"
 				id="password" name="password" class="form-control"
 				placeholder="Password" required autocomplete="off"> <input
@@ -82,7 +82,7 @@
 					Usuario - Registrarse</a>
 			<p>
 				<a title="Olvidaste tu Contraseña ?" href="${urlChange}">Olvidaste
-					tu Contraseña ?</a>
+					tu Contraseña <i class="fa fa-question-circle"></i></a>
 		</div>
 
 		<hr class="featurette-divider">

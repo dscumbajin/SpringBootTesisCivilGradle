@@ -36,7 +36,7 @@
 		</c:if>
 
 		<a href="${urlCreate}" class="btn btn-primary" role="button"
-			title="Nuevo Banner">Nuevo</a><br> <br> 
+			title="Nuevo Banner"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a><br> <br> 
 			
 			
 		<label>Buscar:</label> 

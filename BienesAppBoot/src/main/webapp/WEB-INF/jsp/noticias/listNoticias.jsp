@@ -37,7 +37,7 @@
 		</c:if>
 
 		<a href="${urlCreate}" class="btn btn-primary" role="button"
-			title="Nueva notificación">Nueva</a><br> <br>
+			title="Nueva notificación"><i class="fa fa-plus" aria-hidden="true"></i> Nueva</a><br> <br>
 		<label>Buscar:</label>
 		<input id="searchTerm" type="text" onkeyup="doSearch()" />
 		<br>

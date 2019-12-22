@@ -48,7 +48,7 @@
 		</c:if>
 
 		<a href="${urlCreate}" class="btn btn-primary" role="button"
-			title="Nueva Ubicacion">Nueva</a><br> <br>
+			title="Nueva Ubicacion"><i class="fa fa-plus" aria-hidden="true"></i> Nueva</a><br> <br>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -60,7 +60,7 @@
 
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
-					<button type="submit" title="Buscar" class="btn btn-primary">Buscar</button>
+					<button type="submit" title="Buscar" class="btn btn-primary"> <i class="fa fa-search"></i> Buscar</button>
 				</form>
 
 			</div>

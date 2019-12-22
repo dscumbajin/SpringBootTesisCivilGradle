@@ -96,12 +96,12 @@
 
 					<div class="btn-toolbar" role="toolbar">
 						<div class="btn-group">
-							<button type="submit" title="Guardar" class="btn btn-primary">Guardar</button>
+							<button type="submit" title="Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
 						</div>
 
 						<div class="btn-group">
 							<a href="${urlCancel} " class="btn btn-danger" role="button"
-								title="Cancelar">Cancelar</a>
+								title="Cancelar"><i class="fa fa-window-close"></i> Cancelar</a>
 						</div>
 
 					</div>

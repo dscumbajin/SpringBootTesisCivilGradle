@@ -52,8 +52,8 @@
 		<div class="btn-toolbar" role="toolbar">
 			<div class="btn-group">
 				<a href="${urlCreate}" class="btn btn-primary" role="button"
-					title="Nuevo Bien"><i class="fa fa-plus" aria-hidden="true"></i>
-					Nueva</a>
+					title="Nuevo Bien"><i class="fa fa-plus" aria-hidden="true"></i> 
+					Nuevo</a>
 			</div>
 
 			<div class="btn-group">
@@ -90,7 +90,7 @@
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
-					<button type="submit" title="Buscar" class="btn btn-primary">Buscar</button>
+					<button type="submit" title="Buscar" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
 				</form>
 			</div>
 			<div class="panel-body">

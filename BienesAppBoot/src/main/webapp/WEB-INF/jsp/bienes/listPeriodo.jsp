@@ -64,7 +64,7 @@
 
 			<div class="btn-group">
 				<a href="${urlCancel} " class="btn btn-danger" role="button"
-					title="Cancelar">Cancelar</a>
+					title="Cancelar"><i class="fa fa-window-close"></i> Cancelar</a>
 			</div>
 
 		</div>
@@ -92,7 +92,7 @@
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
-					<button type="submit" title="Buscar" class="btn btn-primary">Buscar</button>
+					<button type="submit" title="Buscar" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
 				</form>
 
 				<br> <label>Buscar:</label> <input id="searchTerm" type="text"

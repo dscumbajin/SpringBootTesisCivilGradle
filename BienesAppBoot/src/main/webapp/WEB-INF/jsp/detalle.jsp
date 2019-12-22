@@ -114,7 +114,7 @@
 						<input type="text" id="searchTerm" name="campo"
 							placeholder="Lector Alta Nueva" autocomplete="off"
 							onkeyup="doSearch()" required="required">
-						<button type="submit" title="Buscar" class="btn btn-primary">Buscar</button>
+						<button type="submit" title="Buscar" class="btn btn-primary"><i class="fa fa-search"> Buscar</i></button>
 
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}"

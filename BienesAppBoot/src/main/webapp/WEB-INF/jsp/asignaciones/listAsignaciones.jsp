@@ -44,7 +44,7 @@
 		</c:if>
 
 		<a href="${urlAsignacion}" class="btn btn-primary" role="button"
-			title="Nueva Asignacion">Asignaciones</a><br> <br>
+			title="Nueva Asignacion"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Asignación</a><br> <br>
 
 
 
@@ -57,7 +57,7 @@
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
-					<button type="submit" title="Buscar" class="btn btn-primary">Buscar</button>
+					<button type="submit" title="Buscar" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
 				</form>
 				
 			</div>
