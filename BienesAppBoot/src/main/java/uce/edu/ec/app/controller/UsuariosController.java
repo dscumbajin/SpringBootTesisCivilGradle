@@ -160,7 +160,7 @@ public class UsuariosController {
 
 	@PostMapping("/savePassword")
 	public String guardarClave(@ModelAttribute Usuario usuario, Model model, BindingResult result,
-			RedirectAttributes attributes, @RequestParam("id") int id, @RequestParam("pwd") String pwd) {
+			RedirectAttributes attributes, @RequestParam("id") int id, @RequestParam("pwdNew") String pwd) {
 
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");

@@ -67,15 +67,16 @@
 				<form:form action="${urlForm}" method="post"
 					modelAttribute="usuario">
 					<form:hidden path="id" />
+					<form:hidden path="pwd" />
 
 					<br>
 					<div class="row">
 
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label class="centrar" for="pwd">Password</label>
-								<form:input type="text" class="form-control" path="pwd"
-									id="pwd" required="required" />
+								<label class="centrar" for="pwdNew">Password</label>
+								<input type="password" class="form-control" name="pwdNew"
+									id="pwdNew" required="required" />
 							</div>
 						</div>
 

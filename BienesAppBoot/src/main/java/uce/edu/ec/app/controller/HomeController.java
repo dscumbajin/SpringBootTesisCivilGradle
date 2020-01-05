@@ -102,7 +102,7 @@ public class HomeController {
 					.buscarPorEstacion_IdAndBien_Alta(idEstacionB, token, page);
 
 			if (bienes_Estaciones.isEmpty()) {
-				model.addAttribute("alerta", "No existe el registro con Alta Nueva: " +token);
+				model.addAttribute("alerta", "No existe el registro con Alta Nueva: " + token);
 				busqueda = "";
 			} else {
 				model.addAttribute("bienes_Estaciones", bienes_Estaciones);
@@ -170,6 +170,7 @@ public class HomeController {
 		String reportType = request.getParameter("type");
 		// Todos los bienes pero por id de estacion
 		List<Bienes_Estaciones> bienes_Estaciones = serviceAsignaciones.buscarIdPorIdEstacion(idEstacionB);
+
 		if (reportType != null && reportType.equals("excel")) {
 			return new ModelAndView(new ExcelBuilderDetalle(), "bienes_Estaciones", bienes_Estaciones);
 

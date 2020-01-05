@@ -13,10 +13,12 @@
 <title>My Control Site | Administración</title>
 <spring:url value="" var="urlPublic" />
 <spring:url value="/" var="urlRoot" />
-<link href="${urlPublic}/images/logouce.ico.ico" type="image/x-icon" rel="shortcut icon"/>
+<link href="${urlPublic}/images/logouce.ico.ico" type="image/x-icon"
+	rel="shortcut icon" />
 <link href="${urlPublic}/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
+<link href="${urlPublic}/css/my-style.css" rel="stylesheet">
 
 
 </head>
@@ -30,10 +32,18 @@
 
 		<hr class="featurette-divider">
 		<div class="jumbotron center">
-			<h3>Administración del Sistema</h3>
+			<div class="titulo">
+				<h3>Administración del Sistema</h3>
+			</div>
+
 			<p style="text-transform: uppercase">
 				Bienvenido(a) <a class="glyphicon glyphicon-user"></a>
 				<sec:authentication property="principal.username" />
+
+			</p>
+			<p style="text-transform: uppercase">
+				Usuario:
+				<sec:authentication property="principal.authorities" />
 			</p>
 		</div>
 
