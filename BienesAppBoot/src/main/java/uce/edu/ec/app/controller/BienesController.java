@@ -191,31 +191,13 @@ public class BienesController {
 			}
 
 		} else {
-			System.out.println("Existe " + serviceBienes.exiteRegistroPorAltaAnterior(alta, anterior));
-			if (serviceBienes.exiteRegistroPorAltaAnterior(alta, anterior)) {
+			
 				serviceDetalles.insertar(bien.getDetalle());
 				serviceBienes.insertar(bien);
 				attributes.addFlashAttribute("mensaje", "El registro con: Alta nueva: "+alta+" y Alta Anterior: "+anterior+" fue editado");
 				edicion = "";
 				return "redirect:/bienes/indexPaginate";
-
-			}
-
-			else {
-				System.out
-						.println("no existe " + serviceBienes.exiteRegistroPorAltaAnterior(alta, anterior));
-				if (serviceBienes.existeRegistroPorALta(alta)) {
-					model.addAttribute("alerta", "Ya existe un registro con Alta Nueva: " + alta);
-					return "bienes/editBien";
-				} else if (serviceBienes.existeRegistroPorAnterior(anterior)) {
-					model.addAttribute("alerta", "Ya existe un registro con Alta Anterior: " + anterior);
-					return "bienes/editBien";
-				} else {
-					model.addAttribute("alerta", "No existe el registro con Alta Nueva: " + alta + " y Alta Anterior: "+anterior+ " para editarlo");
-					return "bienes/editBien";
-				}
-
-			}
+			
 		}
 
 	}

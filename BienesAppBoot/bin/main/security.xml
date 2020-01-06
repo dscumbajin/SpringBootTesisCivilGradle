@@ -21,7 +21,9 @@
 		<intercept-url pattern="/noticias/indexPaginate"
 			access="hasAnyAuthority('ADMINISTRADOR', 'ESTANDAR')" />
 		<intercept-url pattern="/noticias/edit/*"
-			access="hasAnyAuthority('ADMINISTRADOR', 'ESTANDAR')" />
+			access="hasAnyAuthority('ADMINISTRADOR')" />
+		<intercept-url pattern="/noticias/delete/*"
+			access="hasAnyAuthority('ADMINISTRADOR')" />
 		<intercept-url pattern="/banners/indexPaginate"
 			access="hasAnyAuthority('ADMINISTRADOR', 'ESTANDAR')" />
 		<intercept-url pattern="/banners/edit/*"

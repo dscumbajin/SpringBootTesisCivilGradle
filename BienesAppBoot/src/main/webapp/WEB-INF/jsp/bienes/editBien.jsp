@@ -232,7 +232,7 @@
 
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="guarda_almacen">Guarda Almacen</label>
+						<label for="guarda_almacen">Guarda Almacén</label>
 						<form:input type="text" class="form-control"
 							path="detalle.guarda_almacen" id="guarda_almacen"
 							required="required" placeholder="Solo Letras"
