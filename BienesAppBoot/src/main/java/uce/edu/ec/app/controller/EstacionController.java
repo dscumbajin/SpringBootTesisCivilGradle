@@ -131,7 +131,7 @@ public class EstacionController {
 		Estacion estacion = servicioEstaciones.buscarPorId(idEstacion);
 		model.addAttribute("estacion", estacion);
 		edicion = "si";
-		return "estaciones/formEstaciones";
+		return "estaciones/editEstaciones";
 	}
 
 	// Eliminar por id

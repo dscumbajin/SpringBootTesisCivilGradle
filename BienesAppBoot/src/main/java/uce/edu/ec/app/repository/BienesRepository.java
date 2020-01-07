@@ -43,6 +43,7 @@ public interface BienesRepository extends JpaRepository<Bien, Integer> {
 	
 
 	// Lista de bienes que se pueden asignar
-	List<Bien> findByControl(String Control);
+	@Query(value = "select * from BIENES where control = ? order by id desc", nativeQuery = true )
+	List<Bien> findByControl(@Param("control") String Control);
 
 }
