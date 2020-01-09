@@ -48,7 +48,7 @@ public class PDFBuilderDetalle extends AbstractITextPdfView {
 			// Design ParaGraph
 
 			Font blue = new Font(FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.BLUE);
-			Chunk blueText = new Chunk("DETALLE                                                   " + "Hora: "
+			Chunk blueText = new Chunk("CARRERA DE INGENIERÍA CIVIL- DETALLE DE BIENES POR ESTACIÓN     " + "Hora: "
 					+ dateFormatLarg.format(new Date()), blue);
 			Paragraph p = new Paragraph(blueText);
 			p.setAlignment(Element.ALIGN_CENTER);
@@ -144,10 +144,10 @@ public class PDFBuilderDetalle extends AbstractITextPdfView {
 					cell = new PdfPCell(new Phrase(bien_Estacion.getBien().getDetalle().getCausionado(), ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
-					cell = new PdfPCell(new Phrase(bien_Estacion.getEstacion().getLugar(), ffont));
+					cell = new PdfPCell(new Phrase(bien_Estacion.getEstacion().getUbicacion(), ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
-					cell = new PdfPCell(new Phrase(bien_Estacion.getEstacion().getUbicacion(), ffont));
+					cell = new PdfPCell(new Phrase(bien_Estacion.getEstacion().getLugar(), ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
 					cell = new PdfPCell(new Phrase(String.valueOf(dateFormat.format(bien_Estacion.getRegistro())), ffont));

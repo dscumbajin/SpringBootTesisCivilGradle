@@ -12,6 +12,7 @@ import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -30,7 +31,7 @@ public class ExcelBuilderDetalle extends AbstractXlsView {
 	protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		response.setHeader("Content-Disposition",
-				"attachment; filename=\"" + "detalle_" + dateFormat.format(name) + ".xls\"");
+				"attachment; filename=\"" + "Detalle Por Estacion_" + dateFormat.format(name) + ".xls\"");
 		@SuppressWarnings("unchecked")
 		List<Bienes_Estaciones> bienes_Estaciones = (List<Bienes_Estaciones>) model.get("bienes_Estaciones");
 		Sheet sheet = workbook.createSheet("Detalle List");
@@ -44,8 +45,49 @@ public class ExcelBuilderDetalle extends AbstractXlsView {
 		font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
 		font.setColor(HSSFColor.WHITE.index);
 		style.setFont(font);
+		
+		CellStyle headerStyle1 = workbook.createCellStyle();
+		Font titulo = workbook.createFont();
+		titulo.setFontName("Arial");
+		titulo.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+		titulo.setColor(HSSFColor.BLACK.index);
+		headerStyle1.setFont(titulo);
+		headerStyle1.setAlignment(HorizontalAlignment.CENTER);
 
-		Row headerRow = sheet.createRow(0);
+		Row titlerow = sheet.createRow(0);
+		titlerow.createCell(0).setCellValue("");
+		titlerow.createCell(1).setCellValue("");
+		titlerow.createCell(2).setCellValue("");
+		titlerow.createCell(3).setCellValue("");
+		
+		titlerow.createCell(6).setCellValue("UNIVERSIDAD CENTRAL DEL ECUADOR");
+		titlerow.getCell(6).setCellStyle(headerStyle1);
+
+		titlerow = sheet.createRow(1);
+		titlerow.createCell(0).setCellValue("");
+		titlerow.createCell(1).setCellValue("");
+		titlerow.createCell(2).setCellValue("");
+		
+		titlerow.createCell(6).setCellValue("FACULTAD DE INGENIERÍA, CIENCIAS FÍSICAS Y MATEMÁTICA");
+		titlerow.getCell(6).setCellStyle(headerStyle1);
+
+		titlerow = sheet.createRow(2);
+		titlerow.createCell(0).setCellValue("");
+		titlerow.createCell(1).setCellValue("");
+		titlerow.createCell(2).setCellValue("");
+	
+		titlerow.createCell(6).setCellValue("CARRERA DE INGENIERÍA CIVIL - REGISTRO DE BIENES POR LUGAR");
+		titlerow.getCell(6).setCellStyle(headerStyle1);
+
+		titlerow = sheet.createRow(3);
+		titlerow.createCell(0).setCellValue("");
+		titlerow.createCell(1).setCellValue("");
+		titlerow.createCell(2).setCellValue("");
+		titlerow.createCell(3).setCellValue("");
+		titlerow.createCell(4).setCellValue("");
+		titlerow.createCell(5).setCellValue("");
+		
+		Row headerRow = sheet.createRow(4);
 		headerRow.createCell(0).setCellValue("Persona Usa");
 		headerRow.getCell(0).setCellStyle(style);
 		headerRow.createCell(1).setCellValue("Alta Nueva");
@@ -73,7 +115,7 @@ public class ExcelBuilderDetalle extends AbstractXlsView {
 		headerRow.createCell(12).setCellValue("Actualización");
 		headerRow.getCell(12).setCellStyle(style);
 
-		int row = 1;
+		int row = 5;
 		try {
 			for (Bienes_Estaciones bien_Estacion : bienes_Estaciones) {
 				Row dataRow = sheet.createRow(row++);

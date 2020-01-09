@@ -30,6 +30,10 @@ import uce.edu.ec.app.model.Bien;
 
 @Component
 public class PDFBuilder extends AbstractITextPdfView {
+	
+	Font ffont = new Font(FontFamily.HELVETICA, 10f, Font.BOLD);
+	Font ffont2 = new Font(FontFamily.HELVETICA, 8f);
+	
 
 	SimpleDateFormat dateFormatLarg = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -47,8 +51,8 @@ public class PDFBuilder extends AbstractITextPdfView {
 
 			// Design ParaGraph
 
-			Font blue = new Font(FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.BLUE);
-			Chunk blueText = new Chunk("REPORTE DE BIENES                                                    "
+			Font blue = new Font(FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.BLUE);
+			Chunk blueText = new Chunk("CARRERA DE INGENIERÍA CIVIL - REPORTE DE BIENES                         "
 					+ "Hora: " + dateFormatLarg.format(new Date()), blue);
 			Paragraph p = new Paragraph(blueText);
 			p.setAlignment(Element.ALIGN_CENTER);

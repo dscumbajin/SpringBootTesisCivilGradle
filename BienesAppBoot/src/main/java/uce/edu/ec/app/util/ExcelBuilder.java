@@ -12,6 +12,7 @@ import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -37,6 +38,7 @@ public class ExcelBuilder extends AbstractXlsView {
 		Sheet sheet = workbook.createSheet("Bienes List");
 		sheet.setDefaultColumnWidth(15);
 		// create style for header cells
+
 		CellStyle style = workbook.createCellStyle();
 		Font font = workbook.createFont();
 		font.setFontName("Arial");
@@ -46,7 +48,49 @@ public class ExcelBuilder extends AbstractXlsView {
 		font.setColor(HSSFColor.WHITE.index);
 		style.setFont(font);
 
-		Row headerRow = sheet.createRow(0);
+		CellStyle headerStyle1 = workbook.createCellStyle();
+		Font titulo = workbook.createFont();
+		titulo.setFontName("Arial");
+		titulo.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+		titulo.setColor(HSSFColor.BLACK.index);
+		headerStyle1.setFont(titulo);
+		headerStyle1.setAlignment(HorizontalAlignment.CENTER);
+
+		Row titlerow = sheet.createRow(0);
+		titlerow.createCell(0).setCellValue("");
+		titlerow.createCell(1).setCellValue("");
+		titlerow.createCell(2).setCellValue("");
+		titlerow.createCell(3).setCellValue("");
+		
+		titlerow.createCell(6).setCellValue("UNIVERSIDAD CENTRAL DEL ECUADOR");
+		titlerow.getCell(6).setCellStyle(headerStyle1);
+
+		titlerow = sheet.createRow(1);
+		titlerow.createCell(0).setCellValue("");
+		titlerow.createCell(1).setCellValue("");
+		titlerow.createCell(2).setCellValue("");
+		
+		titlerow.createCell(6).setCellValue("FACULTAD DE INGENIERÍA, CIENCIAS FÍSICAS Y MATEMÁTICA");
+		titlerow.getCell(6).setCellStyle(headerStyle1);
+
+		titlerow = sheet.createRow(2);
+		titlerow.createCell(0).setCellValue("");
+		titlerow.createCell(1).setCellValue("");
+		titlerow.createCell(2).setCellValue("");
+	
+		titlerow.createCell(6).setCellValue("CARRERA DE INGENIERÍA CIVIL - REGISTRO DE BIENES");
+		titlerow.getCell(6).setCellStyle(headerStyle1);
+
+		titlerow = sheet.createRow(3);
+		titlerow.createCell(0).setCellValue("");
+		titlerow.createCell(1).setCellValue("");
+		titlerow.createCell(2).setCellValue("");
+		titlerow.createCell(3).setCellValue("");
+		titlerow.createCell(4).setCellValue("");
+		titlerow.createCell(5).setCellValue("");
+	
+
+		Row headerRow = sheet.createRow(4);
 		headerRow.createCell(0).setCellValue("ID");
 		headerRow.getCell(0).setCellStyle(style);
 		headerRow.createCell(1).setCellValue("Alta Nueva");
@@ -88,7 +132,7 @@ public class ExcelBuilder extends AbstractXlsView {
 		headerRow.createCell(19).setCellValue("Causionado");
 		headerRow.getCell(19).setCellStyle(style);
 
-		int row = 1;
+		int row = 5;
 		try {
 			for (Bien bien : bienes) {
 				Row dataRow = sheet.createRow(row++);
