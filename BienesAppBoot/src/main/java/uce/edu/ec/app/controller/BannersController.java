@@ -97,6 +97,13 @@ public class BannersController {
 				return "redirect:/banners/indexPaginate";
 			}
 		} else {
+			// Edición
+			if (!multiPart.isEmpty()) {
+				String nombreImagen = Utileria.guardarImagen(multiPart, request);
+				if (nombreImagen != null) { // La imagen si se subio
+					banner.setArchivo(nombreImagen); // Asignamos el nombre de la imagen
+				}
+			}
 			serviceBanners.insertar(banner);
 			attributes.addFlashAttribute("mensaje", "El registro fue editado");
 			edicion = "";
