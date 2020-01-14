@@ -2,9 +2,8 @@ package uce.edu.ec.app.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -32,6 +31,9 @@ import uce.edu.ec.app.util.Utileria;
 @RequestMapping(value = "/estaciones")
 public class EstacionController {
 
+	@Value("${bienesapp.ruta.imagenes}")
+	private String ruta;
+	
 	@Autowired
 	private IEstacionService servicioEstaciones;
 
@@ -81,7 +83,7 @@ public class EstacionController {
 	// Guardar en base de datos
 	@PostMapping(value = "/save")
 	public String guardar(@ModelAttribute Estacion estacion, BindingResult result, RedirectAttributes attributes,
-			Model model, @RequestParam("archivoImagen") MultipartFile multiPart, HttpServletRequest request,
+			Model model, @RequestParam("archivoImagen") MultipartFile multiPart,
 			@RequestParam("ubicacion") String ubicacion, @RequestParam("lugar") String lugar) {
 
 		if (result.hasErrors()) {
@@ -96,7 +98,7 @@ public class EstacionController {
 				return "estaciones/formEstaciones";
 			} else {
 				if (!multiPart.isEmpty()) {
-					String nombreImagen = Utileria.guardarImagen(multiPart, request);
+					String nombreImagen = Utileria.guardarImagen(multiPart, ruta);
 					if (nombreImagen != null) { // La imagen si se subio
 						estacion.setImagen(nombreImagen); // Asignamos el nombre de la imagen
 					}
@@ -111,7 +113,7 @@ public class EstacionController {
 
 			// Edición
 			if (!multiPart.isEmpty()) {
-				String nombreImagen = Utileria.guardarImagen(multiPart, request);
+				String nombreImagen = Utileria.guardarImagen(multiPart, ruta);
 				if (nombreImagen != null) { // La imagen si se subio
 					estacion.setImagen(nombreImagen); // Asignamos el nombre de la imagen
 				}

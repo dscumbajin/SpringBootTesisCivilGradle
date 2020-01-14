@@ -54,7 +54,7 @@
 			<div class="col-sm-4">
 				<p class="text-center">
 					<img class="img-rounded"
-						src="${urlPublic}/images/${estacion.imagen}"
+						src="${urlPublic}/logos/${estacion.imagen}"
 						alt="Generic placeholder image" width="300" height="200">
 
 				</p>

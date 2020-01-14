@@ -48,7 +48,7 @@
 
 					<div class="col-xs-12 col-sm-6 col-md-3">
 						<img class="img-rounded"
-							src="${urlPublic}/images/${estacion.imagen}"
+							src="${urlPublic}/logos/${estacion.imagen}"
 							alt="Generic placeholder image" width="200" height="150">
 						<h4>${estacion.lugar}</h4>
 						<h4>

@@ -58,13 +58,13 @@
 					<c:choose>
 						<c:when test="${loop.index==0}">
 							<div class="item active">
-								<img src="${urlPublic}/images/${banner.archivo}"
+								<img src="${urlPublic}/logos/${banner.archivo}"
 									alt="${banner.titulo}" title="${banner.titulo}">
 							</div>
 						</c:when>
 						<c:otherwise>
 							<div class="item">
-								<img src="${urlPublic}/images/${banner.archivo}"
+								<img src="${urlPublic}/logos/${banner.archivo}"
 									alt="${banner.titulo}" title="${banner.titulo}">
 							</div>
 						</c:otherwise>
@@ -102,7 +102,7 @@
 
 					<div class="col-xs-12 col-sm-6 col-md-3">
 						<img class="img-rounded"
-							src="${urlPublic}/images/${estacion.imagen}"
+							src="${urlPublic}/logos/${estacion.imagen}"
 							alt="Generic placeholder image" width="200" height="150">
 						<h4>${estacion.lugar}</h4>
 						<h4>

@@ -90,7 +90,7 @@
 								<td>${estacion.ubicacion}</td>
 								<td>${estacion.lugar}</td>
 								<td><img class="img-rounded"
-									src="${urlPublic}/images/${estacion.imagen}"
+									src="${urlPublic}/logos/${estacion.imagen}"
 									alt="Generic placeholder image" width="200" height="150"></td>
 
 								<td><a href="${urlEdit}/${estacion.id}"

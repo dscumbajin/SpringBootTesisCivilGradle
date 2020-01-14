@@ -2,9 +2,8 @@ package uce.edu.ec.app.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -26,6 +25,9 @@ import uce.edu.ec.app.util.Utileria;
 @Controller
 @RequestMapping("/banners")
 public class BannersController {
+	
+	@Value("${bienesapp.ruta.imagenes}")
+	private String ruta;
 
 	@Autowired
 	private IBannersService serviceBanners;
@@ -74,7 +76,7 @@ public class BannersController {
 	 */
 	@PostMapping("/save")
 	public String guardar(Banner banner, BindingResult result, RedirectAttributes attributes,
-			@RequestParam("archivoImagen") MultipartFile multiPart, HttpServletRequest request,
+			@RequestParam("archivoImagen") MultipartFile multiPart,
 			@RequestParam("titulo") String titulo, Model model) {
 
 		if (result.hasErrors()) {
@@ -88,7 +90,7 @@ public class BannersController {
 				return "banners/formBanner";
 			} else {
 				if (!multiPart.isEmpty()) {
-					String nombreImagen = Utileria.guardarImagen(multiPart, request);
+					String nombreImagen = Utileria.guardarImagen(multiPart, ruta);
 					banner.setArchivo(nombreImagen);
 				}
 
@@ -99,7 +101,7 @@ public class BannersController {
 		} else {
 			// Edición
 			if (!multiPart.isEmpty()) {
-				String nombreImagen = Utileria.guardarImagen(multiPart, request);
+				String nombreImagen = Utileria.guardarImagen(multiPart, ruta);
 				if (nombreImagen != null) { // La imagen si se subio
 					banner.setArchivo(nombreImagen); // Asignamos el nombre de la imagen
 				}

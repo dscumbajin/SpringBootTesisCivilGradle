@@ -46,12 +46,12 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="${urlRoot}bienes/indexPaginate?page=0">Bienes</a></li>
-					<li><a href="${urlRoot}estaciones/indexPaginate?page=0">Estaciones</a></li>
-					<li><a href="${urlRoot}asignaciones/indexPaginate?page=0">Asignaciones</a></li>
-					<li><a href="${urlRoot}noticias/indexPaginate?page=0">Notificaciones</a></li>
-					<li><a href="${urlRoot}banners/indexPaginate?page=0">Banners</a></li>
-					<li><a href="${urlRoot}usuarios/indexPaginate?page=0">Usuarios</a></li>
+					<li><a href="${urlRoot}bienes/indexPaginate?page=0"><span class="label label-default">Bienes</span></a></li>
+					<li><a href="${urlRoot}estaciones/indexPaginate?page=0"><span class="label label-primary">Estaciones</span></a></li>
+					<li><a href="${urlRoot}asignaciones/indexPaginate?page=0"><span class="label label-success">Asignaciones</span></a></li>
+					<li><a href="${urlRoot}noticias/indexPaginate?page=0"><span class="label label-info">Notificaciones</span></a></li>
+					<li><a href="${urlRoot}banners/indexPaginate?page=0"><span class="label label-warning">Banners</span></a></li>
+					<li><a href="${urlRoot}usuarios/indexPaginate?page=0"><span class="label label-danger">Usuarios</span></a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -62,7 +62,6 @@
 								class="dropdown-item" href="${urlRoot}reportes/estaciones"><span
 								class="label label-primary">Estaciones</span></a>
 						</div></li>
-
 
 					<li><a href="${urlRoot}admin/logout"><i
 							class="fa fa-sign-out" aria-hidden="true" style="color: red"></i>
@@ -86,8 +85,18 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="${urlRoot}noticias/indexPaginate?page=0">Notificaciones</a></li>
-					<li><a href="${urlRoot}banners/indexPaginate?page=0">Banners</a></li>
+					<li><a href="${urlRoot}noticias/indexPaginate?page=0"><span class="label label-info">Notificaciones</span></a></li>
+					<li><a href="${urlRoot}banners/indexPaginate?page=0"><span class="label label-warning">Banners</span></a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Reportes</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="${urlPersonalizado}"><span
+								class="label label-default">Bienes</span></a> <a
+								class="dropdown-item" href="${urlRoot}reportes/estaciones"><span
+								class="label label-primary">Estaciones</span></a>
+						</div></li>
 					<li><a href="${urlRoot}admin/logout"><i
 							class="fa fa-sign-out" aria-hidden="true" style="color: red"></i>
 							Salir</a></li>
