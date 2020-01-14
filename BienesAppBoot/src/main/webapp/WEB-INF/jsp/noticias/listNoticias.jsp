@@ -30,17 +30,25 @@
 
 	<div class="container theme-showcase" role="main">
 
-		<h3>Listado de Notificaciones</h3>
-
-		<c:if test="${msg !=null }">
-			<div class='alert alert-success' role='alert'>${msg}</div>
+		<c:if test="${mensaje!=null}">
+			<div class='alert alert-success' role="alert">${mensaje}</div>
 		</c:if>
 
+		<c:if test="${alerta!=null}">
+			<div class='alert alert-danger' role="alert">${alerta}</div>
+		</c:if>
+		
+		<div class="col-lg-12">
+			<h2 class="text text-center">
+				<span class="label label-info">Listado de Notificaciones</span> <br>
+			</h2>
+			<hr class="featurette-divider">
+		</div>
+
 		<a href="${urlCreate}" class="btn btn-primary" role="button"
-			title="Nueva notificación"><i class="fa fa-plus" aria-hidden="true"></i> Nueva</a><br> <br>
-		<label>Buscar:</label>
-		<input id="searchTerm" type="text" onkeyup="doSearch()" />
-		<br>
+			title="Nueva notificación"><i class="fa fa-plus"
+			aria-hidden="true"></i> Nueva</a><br> <br> <label>Buscar:</label>
+		<input id="searchTerm" type="text" onkeyup="doSearch()" /> <br>
 		<br>
 
 		<div class="table-responsive">

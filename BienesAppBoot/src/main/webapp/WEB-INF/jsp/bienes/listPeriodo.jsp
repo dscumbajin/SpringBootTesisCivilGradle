@@ -37,9 +37,13 @@
 
 	<div class="container theme-showcase" role="main">
 
-		<h3>Reporte de Bienes por Periodo</h3>
-
-
+		<div class="col-lg-12">
+			<h2 class="text text-center">
+				<span class="label label-default">Reporte de Bienes por
+					Periodo</span> <br>
+			</h2>
+			<hr class="featurette-divider">
+		</div>
 
 		<c:if test="${mensaje!=null}">
 			<div class='alert alert-success' role="alert">${mensaje}</div>
@@ -92,7 +96,9 @@
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
-					<button type="submit" title="Buscar" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+					<button type="submit" title="Buscar" class="btn btn-primary">
+						<i class="fa fa-search"></i> Buscar
+					</button>
 				</form>
 
 				<br> <label>Buscar:</label> <input id="searchTerm" type="text"

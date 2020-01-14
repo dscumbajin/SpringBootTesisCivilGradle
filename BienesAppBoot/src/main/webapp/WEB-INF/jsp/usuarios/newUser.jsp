@@ -25,7 +25,11 @@
 
 	<div class="container theme-showcase" role="main">
 
-		<c:if test="${not empty alerta}">
+		<c:if test="${mensaje!=null}">
+			<div class='alert alert-success' role="alert">${mensaje}</div>
+		</c:if>
+
+		<c:if test="${alerta!=null}">
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
 
@@ -94,7 +98,9 @@
 
 			<div class="btn-toolbar" role="toolbar">
 				<div class="btn-group">
-					<button type="submit" title="Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+					<button type="submit" title="Guardar" class="btn btn-primary">
+						<i class="fa fa-save"></i> Guardar
+					</button>
 				</div>
 
 				<div class="btn-group">

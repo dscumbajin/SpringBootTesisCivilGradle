@@ -30,13 +30,16 @@
 
 	<div class="container theme-showcase" role="main">
 
-		<c:if test="${not empty alerta}">
+			<c:if test="${mensaje!=null}">
+			<div class='alert alert-success' role="alert">${mensaje}</div>
+		</c:if>
+
+		<c:if test="${alerta!=null}">
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
 
 		<h3 class="blog-title">
-			<span class="label label-success">Edición Usuario</span>
-
+			<span class="label label-danger">Edición Usuario</span>
 		</h3>
 
 		<div class="panel panel-default">

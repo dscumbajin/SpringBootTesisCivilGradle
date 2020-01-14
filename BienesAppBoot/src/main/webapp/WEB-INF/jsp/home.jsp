@@ -87,11 +87,9 @@
 		<div class="row page-header">
 			<div class="col-lg-12">
 				<h2 class="text text-center">
-					<span class="label label-success">Estaciones</span>
+					<span class="label label-primary">Estaciones</span>
 				</h2>
-				<form class="form-inline" action="${urlRoot}search" method="post">
-					<div class="form-group"></div>
-				</form>
+				
 			</div>
 		</div>
 
@@ -123,7 +121,7 @@
 
 			<div class="page-header">
 				<h2 class="text text-center">
-					<span class="label label-success">Notificaciones</span>
+					<span class="label label-info">Notificaciones</span>
 				</h2>
 			</div>
 

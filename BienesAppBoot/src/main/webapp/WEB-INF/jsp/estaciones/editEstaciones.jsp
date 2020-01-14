@@ -38,7 +38,7 @@
 		</c:if>
 
 		<h3 class="blog-title">
-			<span class="label label-success">Datos de la Estacion</span>
+			<span class="label label-primary">Datos de la Estación</span>
 		</h3>
 
 

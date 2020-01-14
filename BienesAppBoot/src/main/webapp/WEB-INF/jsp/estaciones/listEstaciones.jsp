@@ -37,8 +37,6 @@
 
 	<div class="container theme-showcase" role="main">
 
-		<h3>Listado de Estaciones</h3>
-
 		<c:if test="${mensaje!=null}">
 			<div class='alert alert-success' role="alert">${mensaje}</div>
 		</c:if>
@@ -46,21 +44,32 @@
 		<c:if test="${alerta!=null}">
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
+		
+		<div class="col-lg-12">
+			<h2 class="text text-center">
+				<span class="label label-primary">Listado de Estaciones</span> <br>
+			</h2>
+			<hr class="featurette-divider">
+		</div>
 
 		<a href="${urlCreate}" class="btn btn-primary" role="button"
-			title="Nueva Ubicacion"><i class="fa fa-plus" aria-hidden="true"></i> Nueva</a><br> <br>
+			title="Nueva Ubicacion"><i class="fa fa-plus" aria-hidden="true"></i>
+			Nueva</a><br> <br>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<form class="form-inline" action="${urlSearch}" method="POST">
 					<div class="form-group">
 						<input type="text" id="searchTerm" name="inputLugar"
-							placeholder="Search for lugar.." onkeyup="doSearch()" required="required">
+							placeholder="Search for lugar.." onkeyup="doSearch()"
+							required="required">
 					</div>
 
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
-					<button type="submit" title="Buscar" class="btn btn-primary"> <i class="fa fa-search"></i> Buscar</button>
+					<button type="submit" title="Buscar" class="btn btn-primary">
+						<i class="fa fa-search"></i> Buscar
+					</button>
 				</form>
 
 			</div>

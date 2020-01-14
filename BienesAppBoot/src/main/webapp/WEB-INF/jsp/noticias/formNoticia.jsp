@@ -30,7 +30,7 @@
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
 		<h3 class="blog-title">
-			<span class="label label-success">Datos de la Notificación</span>
+			<span class="label label-info">Datos de la Notificación</span>
 		</h3>
 
 		<form:form action="${urlForm}" method="POST" modelAttribute="noticia">

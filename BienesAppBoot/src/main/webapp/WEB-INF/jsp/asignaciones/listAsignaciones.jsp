@@ -33,8 +33,6 @@
 
 	<div class="container theme-showcase" role="main">
 
-		<h3>Listado de Asignaciones</h3>
-
 		<c:if test="${mensaje!=null}">
 			<div class='alert alert-success' role="alert">${mensaje}</div>
 		</c:if>
@@ -42,9 +40,17 @@
 		<c:if test="${alerta!=null}">
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
+		
+		<div class="col-lg-12">
+			<h2 class="text text-center">
+				<span class="label label-success">Listado de Asignaciones</span> <br>
+			</h2>
+			<hr class="featurette-divider">
+		</div>
 
 		<a href="${urlAsignacion}" class="btn btn-primary" role="button"
-			title="Nueva Asignacion"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Asignación</a><br> <br>
+			title="Nueva Asignacion"><i class="fa fa-plus" aria-hidden="true"></i>
+			Nueva Asignación</a><br> <br>
 
 
 
@@ -53,13 +59,16 @@
 				<form class="form-inline" action="${urlSearch}" method="POST">
 					<div class="form-group">
 						<input type="text" id="searchTerm" name="campo"
-							placeholder="Lector Alta Nueva.." onkeyup="doSearch()" required="required">
+							placeholder="Lector Alta Nueva.." onkeyup="doSearch()"
+							required="required">
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
-					<button type="submit" title="Buscar" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+					<button type="submit" title="Buscar" class="btn btn-primary">
+						<i class="fa fa-search"></i> Buscar
+					</button>
 				</form>
-				
+
 			</div>
 			<div class="panel-body">
 				<div class="table-responsive">

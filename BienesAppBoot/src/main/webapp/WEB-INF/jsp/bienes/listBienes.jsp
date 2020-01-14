@@ -37,10 +37,6 @@
 
 	<div class="container theme-showcase" role="main">
 
-		<h3>Listado de Bienes</h3>
-
-
-
 		<c:if test="${mensaje!=null}">
 			<div class='alert alert-success' role="alert">${mensaje}</div>
 		</c:if>
@@ -49,10 +45,19 @@
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
 
+
+		<div class="col-lg-12">
+			<h2 class="text text-center">
+				<span class="label label-default">Listado de Bienes</span> <br>
+			</h2>
+			<hr class="featurette-divider">
+		</div>
+
+
 		<div class="btn-toolbar" role="toolbar">
 			<div class="btn-group">
 				<a href="${urlCreate}" class="btn btn-primary" role="button"
-					title="Nuevo Bien"><i class="fa fa-plus" aria-hidden="true"></i> 
+					title="Nuevo Bien"><i class="fa fa-plus" aria-hidden="true"></i>
 					Nuevo</a>
 			</div>
 
@@ -86,11 +91,14 @@
 				<form class="form-inline" action="${urlSearch}" method="POST">
 					<div class="form-group">
 						<input type="text" id="searchTerm" name="campo"
-							placeholder="Lector Alta Nueva" onkeyup="doSearch()" required="required">
+							placeholder="Lector Alta Nueva" onkeyup="doSearch()"
+							required="required">
 					</div>
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
-					<button type="submit" title="Buscar" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+					<button type="submit" title="Buscar" class="btn btn-primary">
+						<i class="fa fa-search"></i> Buscar
+					</button>
 				</form>
 			</div>
 			<div class="panel-body">
@@ -100,8 +108,8 @@
 						class=" table-rwd  table-hover table-striped table-bordered">
 						<thead>
 							<tr>
-								<th>Alta Nueva </th>
-								<th>Alta Anterior </th>
+								<th>Alta Nueva</th>
+								<th>Alta Anterior</th>
 								<th>Serie</th>
 								<th>Descripción</th>
 								<th>Fecha de Ingreso</th>
@@ -184,8 +192,8 @@
 			</ul>
 		</nav>
 	</div>
-	
-	
+
+
 	<!-- /container -->
 	<div class="container theme-showcase">
 

@@ -29,6 +29,9 @@
 		<intercept-url pattern="/banners/edit/*"
 			access="hasAnyAuthority('ADMINISTRADOR','ESTANDAR')" />
 
+		<intercept-url pattern="/reportes/*"
+			access="hasAnyAuthority('ADMINISTRADOR','ESTANDAR')" />
+
 		<form-login login-page="/formLogin"
 			default-target-url="/admin/index" />
 	</http>

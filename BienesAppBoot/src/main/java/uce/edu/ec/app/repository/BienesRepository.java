@@ -18,10 +18,10 @@ public interface BienesRepository extends JpaRepository<Bien, Integer> {
 	@Query(value = "SELECT * FROM Bienes WHERE fecha_ingreso BETWEEN :startDate AND :endDate ORDER BY fecha_ingreso DESC", nativeQuery = true)
 	Page<Bien> findByPeriodo(@Param("startDate") Date startDate, @Param("endDate") Date endDate, Pageable page);
 
-	// @Query( value = "SELECT * FROM BIENES WHERE ALTA = ?1", nativeQuery = true)
-	@Query(value = "SELECT * FROM Bienes b WHERE b.alta like %:input% or b.anterior like %:input%"
-			+ " or b.serie like %:input% or b.descripcion like %:input% ORDER BY garantia DESC", nativeQuery = true)
-	Page<Bien> findByInput(@Param("input") String input, Pageable page);
+	@Query( value = "SELECT * FROM BIENES WHERE ALTA = ?1", nativeQuery = true)
+//	@Query(value = "SELECT * FROM Bienes b WHERE b.alta like %:input% or b.anterior like %:input%"
+//			+ " or b.serie like %:input% or b.descripcion like %:input% ORDER BY garantia DESC", nativeQuery = true)
+	Page<Bien> findByInput(@Param("alta") String input, Pageable page);
 	
 	//Lista todos los bienes oredenados por fecha de ingreso descendente
 	@Query( value = "SELECT * FROM BIENES b, DETALLES d WHERE b.id_detalle = d.id ORDER BY b.fecha_ingreso DESC", nativeQuery = true)

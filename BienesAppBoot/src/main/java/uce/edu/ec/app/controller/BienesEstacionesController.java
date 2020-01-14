@@ -145,7 +145,7 @@ public class BienesEstacionesController {
 				edicion = "";
 			}
 		} catch (Exception alerta) {
-			System.out.println("El error fue: "+ attributes.addFlashAttribute("alerta", "La asignación fue erronea "));
+			System.out.println("El error fue: "+ attributes.addFlashAttribute("alerta", "Error al Asignar"));
 		}
 
 		return "redirect:/asignaciones/indexPaginate";

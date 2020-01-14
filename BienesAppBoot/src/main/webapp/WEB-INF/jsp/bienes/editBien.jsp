@@ -42,7 +42,7 @@
 
 		<div class="page-header">
 			<h3 class="blog-title">
-				<span class="label label-success">Datos del Bien</span>
+				<span class="label label-default">Datos del Bien</span>
 			</h3>
 		</div>
 
@@ -66,6 +66,7 @@
 				<form:hidden path="detalle.id" />
 				<form:hidden path="alta" />
 				<form:hidden path="anterior" />
+				<form:hidden path="control" />
 				
 				<div class="col-sm-3">
 					<div class="form-group">
@@ -165,7 +166,7 @@
 			<!-- Para la entidad Detalle -->
 			<div class="page-header">
 				<h3 class="blog-title">
-					<span class="label label-success">Detalles</span>
+					<span class="label label-default">Detalles</span>
 				</h3>
 			</div>
 
