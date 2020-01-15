@@ -30,12 +30,15 @@ import uce.edu.ec.app.util.PDFBuilderDetalle;
 @Controller
 @RequestMapping(value = "/reportes")
 public class ReporteController {
+
 	@Autowired
 	private IEstacionService serviceEstaciones;
+
 	@Autowired
 	private IBienes_Estaciones serviceAsignaciones;
 
 	private int idEstacionB = 0;
+
 	private int numEquipos = 0;
 
 	private String busqueda = "";
@@ -90,13 +93,12 @@ public class ReporteController {
 		}
 		return "reportes/detalleEstacion";
 	}
-	
-	
+
 	@GetMapping(value = "/personalizado")
 	public String mostrarPeriodo() {
 		return "redirect:/reportes/detallePeriodoPaginate";
 	}
-	
+
 	// Redireccion formulario de busqueda por periodo
 	@GetMapping(value = "/detallePeriodoPaginate")
 	public String mostrarPeriodoPaginado(Model model, Pageable page) {
@@ -105,31 +107,38 @@ public class ReporteController {
 
 			System.out.println("Inicio: " + busqueda);
 			// Formulario en blanco
-			model.addAttribute("numEquipo", numEquipos);
+			model.addAttribute("numEquipo", 0);
 			model.addAttribute("estacion", serviceEstaciones.buscarPorId(idEstacionB));
 
 		} else if (paginado == "si") {
 			// Formulario con busqueda personalizada
-			model.addAttribute("numEquipo", numEquipos);
-			model.addAttribute("estacion", serviceEstaciones.buscarPorId(idEstacionB));
-			Page<Bienes_Estaciones> bienes_Estaciones = serviceAsignaciones
-					.buscarCambiosPorPeriodoAndIdEstacion(idEstacionB, inicio, fin, page);
 
-			if (bienes_Estaciones.isEmpty()) {
+			model.addAttribute("estacion", serviceEstaciones.buscarPorId(idEstacionB));
+
+			Page<Bienes_Estaciones> bienes_Estaciones_Paginado = serviceAsignaciones
+					.buscarCambiosPorPeriodoAndIdEstacionPaginado(idEstacionB, inicio, fin, page);
+
+			if (bienes_Estaciones_Paginado.isEmpty()) {
 				// Mensaje de no encontrado
 				model.addAttribute("alerta", "No existen registros para el período comprendido entre: "
 						+ dateFormat.format(inicio) + " & " + dateFormat.format(fin));
 				busqueda = "";
 			} else {
-				cambioPeriodoDetalle = bienes_Estaciones.getContent();
-				model.addAttribute("bienes_Estaciones", bienes_Estaciones);
+				List<Bienes_Estaciones> bienes_Estaciones = serviceAsignaciones
+						.buscarCambiosPorPeriodoAndIdEstacion(idEstacionB, inicio, fin);
+				for (Bienes_Estaciones l : bienes_Estaciones) {
+					System.out.println(l.toString());
+				}
+				cambioPeriodoDetalle = bienes_Estaciones;
+				model.addAttribute("numEquipo", bienes_Estaciones.size());
+				System.out.println("Tamaño de lista: " + bienes_Estaciones.size());
+				model.addAttribute("bienes_Estaciones", bienes_Estaciones_Paginado);
 				System.out.println("Primer paginado: " + busqueda + paginado);
 			}
-
 		}
 		return "reportes/detalleEstacionPeriodo";
 	}
-	
+
 	// Busqueda por fecha inicio and fin
 
 	@PostMapping(value = "/buscar")
@@ -142,8 +151,7 @@ public class ReporteController {
 		paginado = "si";
 		return "redirect:/reportes/detallePeriodoPaginate";
 	}
-	
-	
+
 	// Reporte Todos los bienes por salas
 	@GetMapping(value = "/downloadTotalDetalle")
 	public ModelAndView getReport(HttpServletRequest request, HttpServletResponse response) {
@@ -175,7 +183,6 @@ public class ReporteController {
 
 	}
 
-
 	// Busqueda por alta
 	@PostMapping(value = "/search")
 	public String buscar(@RequestParam("campo") String campo) {
@@ -189,6 +196,7 @@ public class ReporteController {
 	public String Cancelar() {
 		busqueda = "";
 		paginado = "";
+		cambioPeriodoDetalle = null;
 		return "redirect:/reportes/detailPaginate";
 	}
 

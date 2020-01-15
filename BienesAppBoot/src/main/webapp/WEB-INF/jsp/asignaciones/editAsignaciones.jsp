@@ -31,10 +31,12 @@
 	<jsp:include page="../includes/menu.jsp"></jsp:include>
 
 	<div class="container theme-showcase" role="main">
-
-		<h3 class="blog-title">
-			<span class="label label-success">Datos Biens - Estacion</span>
-		</h3>
+		
+		<div class="page-header">
+			<h3 class="blog-title">
+				<span class="label label-success">Datos Bien - Estación</span>
+			</h3>
+		</div>
 
 		<spring:hasBindErrors name="bien">
 			<div class='alert alert-danger' role='alert'>
@@ -58,9 +60,9 @@
 						<form:hidden path="id" />
 
 						<form:input type="text" path="bien.alta" id="id_bien"
-							readonly="readonly" class="form-control" disabled="true"/>
+							readonly="readonly" class="form-control" disabled="true" />
 						<form:hidden path="bien.alta" />
-						
+
 					</div>
 				</div>
 
@@ -75,7 +77,7 @@
 
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="registro">Fecha registro</label>
+						<label for="registro">Fecha Ingreso</label>
 						<form:input type="text" class="form-control" path="registro"
 							id="registro" readonly="readonly" />
 					</div>
@@ -85,7 +87,9 @@
 
 			<div class="btn-toolbar" role="toolbar">
 				<div class="btn-group">
-					<button type="submit" title="Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+					<button type="submit" title="Guardar" class="btn btn-primary">
+						<i class="fa fa-save"></i> Guardar
+					</button>
 				</div>
 
 				<div class="btn-group">

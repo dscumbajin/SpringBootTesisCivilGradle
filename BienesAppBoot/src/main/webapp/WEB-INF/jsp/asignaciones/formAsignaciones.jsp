@@ -32,9 +32,11 @@
 
 	<div class="container theme-showcase" role="main">
 
-		<h3 class="blog-title">
-			<span class="label label-success">Datos Biens - Estacion</span>
-		</h3>
+		<div class="page-header">
+			<h3 class="blog-title">
+				<span class="label label-success">Datos Bien - Estación</span>
+			</h3>
+		</div>
 
 		<spring:hasBindErrors name="bien">
 			<div class='alert alert-danger' role='alert'>
@@ -51,7 +53,7 @@
 			enctype="multipart/form-data" modelAttribute="bienes_Estaciones">
 
 			<div class="row">
-				
+
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="id_bien" class="control-label">Bien</label>

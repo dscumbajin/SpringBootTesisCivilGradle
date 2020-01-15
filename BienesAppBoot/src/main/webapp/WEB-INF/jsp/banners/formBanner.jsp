@@ -19,7 +19,8 @@
 <link href="${urlPublic}/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
-<link href="${urlPublic}/images/logouce.ico.ico" type="image/x-icon" rel="shortcut icon"/>
+<link href="${urlPublic}/images/logouce.ico.ico" type="image/x-icon"
+	rel="shortcut icon" />
 </head>
 
 <body>
@@ -30,16 +31,19 @@
 		<c:if test="${not empty alerta}">
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
-		<h3 class="blog-title">
-			<span class="label label-warning">Datos de la imagen</span>
-		</h3>
+
+		<div class="page-header">
+			<h3 class="blog-title">
+				<span class="label label-warning">Datos de la imagen</span>
+			</h3>
+		</div>
 
 		<form:form action="${urlForm}" method="post"
 			enctype="multipart/form-data" modelAttribute="banner">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label for="titulo">Titulo</label>
+						<label for="titulo">Título</label>
 
 						<form:hidden path="id" />
 						<form:input type="text" class="form-control" path="titulo"
@@ -68,7 +72,9 @@
 			</div>
 			<div class="btn-toolbar" role="toolbar">
 				<div class="btn-group">
-					<button type="submit" title="Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+					<button type="submit" title="Guardar" class="btn btn-primary">
+						<i class="fa fa-save"></i> Guardar
+					</button>
 				</div>
 
 				<div class="btn-group">

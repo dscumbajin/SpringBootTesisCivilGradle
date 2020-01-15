@@ -32,10 +32,12 @@
 		<c:if test="${alerta!=null}">
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
-
-		<h3 class="blog-title">
-			<span class="label label-success">Datos del Usuario</span>
-		</h3>
+		
+		<div class="page-header">
+			<h3 class="blog-title">
+				<span class="label label-danger">Datos del Usuario</span>
+			</h3>
+		</div>
 
 		<form:form action="${urlForm}" method="post" modelAttribute="usuario">
 			<div class="row">

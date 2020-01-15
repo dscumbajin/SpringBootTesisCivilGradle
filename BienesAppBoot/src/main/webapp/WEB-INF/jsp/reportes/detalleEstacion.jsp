@@ -179,9 +179,9 @@
 		<nav aria-label="">
 			<ul class="pager">
 				<li><a
-					href="${urlRoot}detailPaginate?page=${bienes_Estaciones.number - 1 }">Anterior</a></li>
+					href="/reportes/detailPaginate?page=${bienes_Estaciones.number - 1 }">Anterior</a></li>
 				<li><a
-					href="${urlRoot}detailPaginate?page=${bienes_Estaciones.number + 1 }">Siguiente</a></li>
+					href="/reportes/detailPaginate?page=${bienes_Estaciones.number + 1 }">Siguiente</a></li>
 			</ul>
 		</nav>
 

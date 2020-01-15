@@ -8,6 +8,7 @@
 <spring:url value="" var="urlPublic"></spring:url>
 <spring:url value="/bienes/save" var="urlForm"></spring:url>
 <spring:url value="/bienes/cancel" var="urlCancel"></spring:url>
+<spring:url value="/bienes/busquedaPrevia" var="urlBusquedaPrevia" />
 
 <!DOCTYPE html>
 <html lang="es">
@@ -36,8 +37,30 @@
 
 	<div class="container theme-showcase" role="main">
 
+
+		<div class="page-header">
+			<form class="form-inline" action="${urlBusquedaPrevia}" method="POST">
+				<div class="form-group">
+					<input type="text" id="searchTerm" name="campo"
+						class="form-control" placeholder="Lector Alta Nueva"
+						onkeyup="doSearch()" required="required">
+				</div>
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+				<button type="submit" title="Buscar" class="btn btn-primary">
+					<i class="fa fa-search"></i> Buscar
+				</button>
+			</form>
+
+
+		</div>
+
 		<c:if test="${not empty alerta}">
 			<div class='alert alert-danger' role="alert">${alerta}</div>
+		</c:if>
+		
+		<c:if test="${mensaje!=null}">
+			<div class='alert alert-success' role="alert">${mensaje}</div>
 		</c:if>
 
 		<div class="page-header">
@@ -45,8 +68,6 @@
 				<span class="label label-default">Datos del Bien</span>
 			</h3>
 		</div>
-
-
 
 		<spring:hasBindErrors name="bien">
 			<div class='alert alert-danger' role='alert'>
@@ -140,14 +161,16 @@
 					<div class="form-group">
 						<label for="color">Color</label>
 						<form:input type="text" class="form-control" path="color"
-							id="color" required="required" />
+							id="color" required="required" placeholder="Plomo - Azul - Negro -?"
+							pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="material">Material</label>
 						<form:input type="text" class="form-control" path="material"
-							id="material" required="required" />
+							id="material" required="required" placeholder="Plástico - Metal - ?"
+							pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" />
 					</div>
 				</div>
 
@@ -178,7 +201,8 @@
 					<div class="form-group">
 						<label for="marca">Marca</label>
 						<form:input type="text" class="form-control" path="detalle.marca"
-							id="marca" required="required" />
+							id="marca" required="required" placeholder="Hp - Accer - ?"
+							pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
 					</div>
 				</div>
 				<div class="col-sm-3">
@@ -228,7 +252,7 @@
 						<form:input type="text" class="form-control"
 							path="detalle.guarda_almacen" id="guarda_almacen"
 							required="required" placeholder="Solo Letras"
-							pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
+							pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" />
 					</div>
 				</div>
 
@@ -238,14 +262,16 @@
 						<form:input type="text" class="form-control"
 							path="detalle.causionado" id="causionado" required="required"
 							placeholder="Solo Letras"
-							pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
+							pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" />
 					</div>
 				</div>
 			</div>
 
 			<div class="btn-toolbar" role="toolbar">
 				<div class="btn-group">
-					<button type="submit" title="Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+					<button type="submit" title="Guardar" class="btn btn-primary">
+						<i class="fa fa-save"></i> Guardar
+					</button>
 				</div>
 
 				<div class="btn-group">
@@ -279,5 +305,6 @@
 			});
 		});
 	</script>
+	
 </body>
 </html>

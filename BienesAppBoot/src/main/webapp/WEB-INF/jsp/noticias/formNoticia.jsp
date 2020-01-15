@@ -17,7 +17,8 @@
 <link href="${urlPublic}/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
-<link href="${urlPublic}/images/logouce.ico.ico" type="image/x-icon" rel="shortcut icon"/>
+<link href="${urlPublic}/images/logouce.ico.ico" type="image/x-icon"
+	rel="shortcut icon" />
 
 </head>
 
@@ -29,9 +30,12 @@
 		<c:if test="${not empty alerta}">
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
-		<h3 class="blog-title">
-			<span class="label label-info">Datos de la Notificación</span>
-		</h3>
+		
+		<div class="page-header">
+			<h3 class="blog-title">
+				<span class="label label-info">Datos de la Notificación</span>
+			</h3>
+		</div>
 
 		<form:form action="${urlForm}" method="POST" modelAttribute="noticia">
 			<div class="row">
@@ -40,7 +44,7 @@
 						<label for="titulo">Título</label>
 						<form:hidden path="id" />
 						<form:input class="form-control" path="titulo" id="titulo"
-							required="required" autocomplete="off"/>
+							required="required" autocomplete="off" />
 					</div>
 				</div>
 				<div class="col-sm-3">
@@ -64,7 +68,9 @@
 			</div>
 			<div class="btn-toolbar" role="toolbar">
 				<div class="btn-group">
-					<button type="submit" title="Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+					<button type="submit" title="Guardar" class="btn btn-primary">
+						<i class="fa fa-save"></i> Guardar
+					</button>
 				</div>
 
 				<div class="btn-group">

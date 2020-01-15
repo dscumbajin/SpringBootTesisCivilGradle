@@ -56,8 +56,8 @@
 				class="table table-hover table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Titulo</th>
-						<th>Fecha Publicacion</th>
+						<th>Título</th>
+						<th>Fecha Publicación</th>
 						<th>Nombre Archivo</th>
 						<th>Estatus</th>
 						<th>Opciones</th>

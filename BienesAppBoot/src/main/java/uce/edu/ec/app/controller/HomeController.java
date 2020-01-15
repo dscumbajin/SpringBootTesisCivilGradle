@@ -48,6 +48,7 @@ public class HomeController {
 	private IBienes_Estaciones serviceAsignaciones;
 
 	private int idEstacionB = 0;
+	
 	private int numEquipos = 0;
 
 	private String busqueda = "";
@@ -126,28 +127,36 @@ public class HomeController {
 
 			System.out.println("Inicio: " + busqueda);
 			// Formulario en blanco
-			model.addAttribute("numEquipo", numEquipos);
+			model.addAttribute("numEquipo", 0);
 			model.addAttribute("estacion", serviceEstaciones.buscarPorId(idEstacionB));
 
 		} else if (paginado == "si") {
 			// Formulario con busqueda personalizada
-			model.addAttribute("numEquipo", numEquipos);
+			
 			model.addAttribute("estacion", serviceEstaciones.buscarPorId(idEstacionB));
-			Page<Bienes_Estaciones> bienes_Estaciones = serviceAsignaciones
-					.buscarCambiosPorPeriodoAndIdEstacion(idEstacionB, inicio, fin, page);
 
-			if (bienes_Estaciones.isEmpty()) {
+			Page<Bienes_Estaciones> bienes_Estaciones_Paginado = serviceAsignaciones
+					.buscarCambiosPorPeriodoAndIdEstacionPaginado(idEstacionB, inicio, fin, page);
+
+			if (bienes_Estaciones_Paginado.isEmpty()) {
 				// Mensaje de no encontrado
 				model.addAttribute("alerta", "No existen registros para el período comprendido entre: "
 						+ dateFormat.format(inicio) + " & " + dateFormat.format(fin));
 				busqueda = "";
 			} else {
-				cambioPeriodoDetalle = bienes_Estaciones.getContent();
-				model.addAttribute("bienes_Estaciones", bienes_Estaciones);
+				List<Bienes_Estaciones> bienes_Estaciones = serviceAsignaciones
+						.buscarCambiosPorPeriodoAndIdEstacion(idEstacionB, inicio, fin);
+				for (Bienes_Estaciones l : bienes_Estaciones) {
+					System.out.println(l.toString());
+				}
+				cambioPeriodoDetalle = bienes_Estaciones;
+				model.addAttribute("numEquipo", bienes_Estaciones.size());
+				System.out.println("Tamaño de lista: " + bienes_Estaciones.size());
+				model.addAttribute("bienes_Estaciones", bienes_Estaciones_Paginado);
 				System.out.println("Primer paginado: " + busqueda + paginado);
 			}
-
 		}
+
 		return "detalleCambioPeriodo";
 	}
 
@@ -199,6 +208,7 @@ public class HomeController {
 	public String Cancelar() {
 		busqueda = "";
 		paginado = "";
+		cambioPeriodoDetalle = null;
 		return "redirect:/detailPaginate";
 	}
 

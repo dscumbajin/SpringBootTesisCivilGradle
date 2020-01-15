@@ -97,7 +97,7 @@ public class ExcelBuilder extends AbstractXlsView {
 		headerRow.getCell(1).setCellStyle(style);
 		headerRow.createCell(2).setCellValue("Alta Anterior");
 		headerRow.getCell(2).setCellStyle(style);
-		headerRow.createCell(3).setCellValue("Descripcion");
+		headerRow.createCell(3).setCellValue("Descripción");
 		headerRow.getCell(3).setCellStyle(style);
 		headerRow.createCell(4).setCellValue("Serie");
 		headerRow.getCell(4).setCellStyle(style);
@@ -105,11 +105,11 @@ public class ExcelBuilder extends AbstractXlsView {
 		headerRow.getCell(5).setCellStyle(style);
 		headerRow.createCell(6).setCellValue("Costo");
 		headerRow.getCell(6).setCellStyle(style);
-		headerRow.createCell(7).setCellValue("Vida Util");
+		headerRow.createCell(7).setCellValue("Vida Útil");
 		headerRow.getCell(7).setCellStyle(style);
-		headerRow.createCell(8).setCellValue("Depreciacion");
+		headerRow.createCell(8).setCellValue("Depreciación");
 		headerRow.getCell(8).setCellStyle(style);
-		headerRow.createCell(9).setCellValue("Fecha fin de garantia");
+		headerRow.createCell(9).setCellValue("Fecha fin de garantía");
 		headerRow.getCell(9).setCellStyle(style);
 		headerRow.createCell(10).setCellValue("Color");
 		headerRow.getCell(10).setCellStyle(style);
@@ -127,7 +127,7 @@ public class ExcelBuilder extends AbstractXlsView {
 		headerRow.getCell(16).setCellStyle(style);
 		headerRow.createCell(17).setCellValue("Tipo");
 		headerRow.getCell(17).setCellStyle(style);
-		headerRow.createCell(18).setCellValue("Guarda Almacen");
+		headerRow.createCell(18).setCellValue("Guarda Almacén");
 		headerRow.getCell(18).setCellStyle(style);
 		headerRow.createCell(19).setCellValue("Causionado");
 		headerRow.getCell(19).setCellStyle(style);

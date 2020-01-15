@@ -95,7 +95,7 @@ public class BienesController {
 			// Formulario con registro buscado
 			Page<Bien> lista = serviceBienes.search(token, page);
 			if (lista.isEmpty()) {
-				model.addAttribute("alerta", "No existe el registro con Alta Nueva: " + token);
+				model.addAttribute("alerta", "No existe el Bien con Alta Nueva: " + token);
 				busqueda = "";
 			} else {
 				model.addAttribute("bienes", lista);
@@ -114,17 +114,17 @@ public class BienesController {
 		if (busqueda == "") {
 			// Lista vacia
 		} else if (paginado == "si") {
-			Page<Bien> lista = serviceBienes.buscarPeriodo(inicio, fin, page);
+			Page<Bien> lista = serviceBienes.buscarPeriodoPaginado(inicio, fin, page);
 			if (lista.isEmpty()) {
 				// Mensaje de no encontrado
-				model.addAttribute("alerta", "No existen registros para el período comprendido entre: "
+				model.addAttribute("alerta", "No existen Bienes registrados para el período comprendido entre: "
 						+ dateFormat.format(inicio) + " & " + dateFormat.format(fin));
 				busqueda = "";
 
 			} else {
+				List<Bien> bienesLista = serviceBienes.buscarPeriodo(inicio, fin);
 				model.addAttribute("bienes", lista);
-				bienesPorPeriodo = lista.getContent();
-				busqueda = "";
+				bienesPorPeriodo = bienesLista;
 			}
 
 		}
@@ -140,8 +140,24 @@ public class BienesController {
 		return "redirect:/bienes/indexPaginate";
 	}
 
-	// Busqueda por fecha inicio and fin
+	// Busqueda por alta
+	@PostMapping(value = "/busquedaPrevia")
+	public String busquedaPrevia(@RequestParam("campo") String campo, RedirectAttributes attributes) {
+		System.out.println("alta: " + campo);
 
+		if (serviceBienes.existeRegistroPorALta(campo)) {
+			attributes.addFlashAttribute("alerta", "Ya existe un Bien con Alta Nueva: " + campo);
+			return "redirect:/bienes/create";
+		} else if (serviceBienes.existeRegistroPorAnterior(campo)) {
+			attributes.addFlashAttribute("alerta", "Ya existe un Bien con Alta Anterior: " + campo);
+			return "redirect:/bienes/create";
+		} else {
+			attributes.addFlashAttribute("mensaje", "No existe el Bien con Alta Nueva: "+campo +" - ni Alta Anterior: "+campo );
+			return "redirect:/bienes/create";
+		}
+	}
+
+	// Busqueda por fecha inicio and fin
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
 	public String buscarPeriodo(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate)
 			throws ParseException {
@@ -178,26 +194,27 @@ public class BienesController {
 		if (edicion == "") {
 
 			if (serviceBienes.existeRegistroPorALta(alta)) {
-				model.addAttribute("alerta", "Ya existe un registro con Alta Nueva: " + alta);
+				model.addAttribute("alerta", "Ya existe un Bien con Alta Nueva: " + alta);
 				return "bienes/formBien";
 			} else if (serviceBienes.existeRegistroPorAnterior(anterior)) {
-				model.addAttribute("alerta", "Ya existe un registro con Alta Anterior: " + anterior);
+				model.addAttribute("alerta", "Ya existe un Bien con Alta Anterior: " + anterior);
 				return "bienes/formBien";
 			} else {
 				serviceDetalles.insertar(bien.getDetalle());
 				serviceBienes.insertar(bien);
-				attributes.addFlashAttribute("mensaje", "El registro fue guardado");
+				attributes.addFlashAttribute("mensaje", "Bien registrado con exito");
 				return "redirect:/bienes/indexPaginate";
 			}
 
 		} else {
-			
-				serviceDetalles.insertar(bien.getDetalle());
-				serviceBienes.insertar(bien);
-				attributes.addFlashAttribute("mensaje", "El registro con: Alta nueva: "+alta+" y Alta Anterior: "+anterior+" fue editado");
-				edicion = "";
-				return "redirect:/bienes/indexPaginate";
-			
+
+			serviceDetalles.insertar(bien.getDetalle());
+			serviceBienes.insertar(bien);
+			attributes.addFlashAttribute("mensaje",
+					"El Bien con: Alta nueva: " + alta + " y Alta Anterior: " + anterior + " fue editado");
+			edicion = "";
+			return "redirect:/bienes/indexPaginate";
+
 		}
 
 	}
@@ -230,27 +247,29 @@ public class BienesController {
 			serviceAsignacion.eliminar(a);
 			serviceBienes.eliminar(idBien);
 			serviceDetalles.eliminar(bien.getDetalle().getId());
-			attributes.addFlashAttribute("mensaje", "Registro eliminado");
+			attributes.addFlashAttribute("mensaje", "Bien eliminado");
 			System.out.println("entra");
 		} else {
 			System.out.println("no entra");
 			serviceBienes.eliminar(idBien);
 			serviceDetalles.eliminar(bien.getDetalle().getId());
-			attributes.addFlashAttribute("mensaje", "Registro eliminado");
+			attributes.addFlashAttribute("mensaje", "Bien eliminado");
 		}
 
 		return "redirect:/bienes/indexPaginate";
 	}
 
-	@RequestMapping(value = "/cancel")
+	@GetMapping(value = "/cancel")
 	public String mostrarAcerca() {
 		busqueda = "";
 		paginado = "";
-		return "redirect:/bienes/indexPaginate";
+		bienesPorPeriodo = null;
+		return "redirect:/admin/index";
 	}
 
-	@RequestMapping(value = "/personalizado")
+	@GetMapping(value = "/personalizado")
 	public String mostrarPeriodo() {
+
 		return "redirect:/bienes/periodPaginate";
 	}
 

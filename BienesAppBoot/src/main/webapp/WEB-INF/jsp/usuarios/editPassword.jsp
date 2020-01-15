@@ -38,11 +38,13 @@
 		<c:if test="${mensaje!=null}">
 			<div class='alert alert-success' role="alert">${mensaje}</div>
 		</c:if>
+		
+		<div class="page-header">
+			<h3 class=" blog-title">
+				<span class="label label-danger">Cambio de Contraseña</span>
 
-		<h3 class=" blog-title">
-			<span class="label label-success">Cambio de Contraseña</span>
-
-		</h3>
+			</h3>
+		</div>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -74,9 +76,9 @@
 
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label class="centrar" for="pwdNew">Password</label>
-								<input type="password" class="form-control" name="pwdNew"
-									id="pwdNew" required="required" />
+								<label class="centrar" for="pwdNew">Password</label> <input
+									type="password" class="form-control" name="pwdNew" id="pwdNew"
+									required="required" />
 							</div>
 						</div>
 
@@ -84,7 +86,9 @@
 
 					<div class="btn-toolbar" role="toolbar">
 						<div class="btn-group">
-							<button type="submit" title="Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+							<button type="submit" title="Guardar" class="btn btn-primary">
+								<i class="fa fa-save"></i> Guardar
+							</button>
 						</div>
 
 						<div class="btn-group">

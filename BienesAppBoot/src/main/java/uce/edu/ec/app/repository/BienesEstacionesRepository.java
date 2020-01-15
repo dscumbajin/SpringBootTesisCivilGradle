@@ -29,6 +29,10 @@ public interface BienesEstacionesRepository extends JpaRepository<Bienes_Estacio
 	Page<Bienes_Estaciones> findByEstacion_IdAndActualizacionBetweenOrderByActualizacionDesc(int idEstacion,
 			Date startDate, Date endDate, Pageable page);
 
+	// Buscar los bienes que fueron cambiados en algun periodo
+	List<Bienes_Estaciones> findByEstacion_IdAndActualizacionBetweenOrderByActualizacionDesc(int idEstacion,
+			Date startDate, Date endDate);
+
 	// Lista todas las asignaciones oredenados
 	@Query(value = "SELECT * FROM BIENES_ESTACIONES be, ESTACIONES e WHERE be.id_estacion = e.id  ORDER BY e.lugar DESC, be.registro DESC ", nativeQuery = true)
 	Page<Bienes_Estaciones> findAllOrdenado(Pageable page);

@@ -37,10 +37,11 @@
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
 
-		<h3 class="blog-title">
-			<span class="label label-primary">Datos de la Estación</span>
-		</h3>
-
+		<div class="page-header">
+			<h3 class="blog-title">
+				<span class="label label-primary">Datos de la Estación</span>
+			</h3>
+		</div>
 
 		<spring:hasBindErrors name="estacion">
 			<div class='alert alert-danger' role='alert'>
@@ -62,7 +63,7 @@
 
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="ubicacion">Ubicacion</label>
+						<label for="ubicacion">Ubicación</label>
 						<form:hidden path="id" />
 						<form:input type="text" class="form-control" path="ubicacion"
 							id="ubicacion" placeholder="Edificio de cómputo"
@@ -92,7 +93,9 @@
 			</div>
 			<div class="btn-toolbar" role="toolbar">
 				<div class="btn-group">
-					<button type="submit" title="Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+					<button type="submit" title="Guardar" class="btn btn-primary">
+						<i class="fa fa-save"></i> Guardar
+					</button>
 				</div>
 
 				<div class="btn-group">

@@ -78,12 +78,6 @@ public class BienesEstacionesJPA implements IBienes_Estaciones {
 	}
 
 	@Override
-	public Page<Bienes_Estaciones> buscarCambiosPorPeriodoAndIdEstacion(int idEstacion, Date startDate, Date endDate,
-			Pageable page) {
-		return bienesEstacionesRepo.findByEstacion_IdAndActualizacionBetweenOrderByActualizacionDesc(idEstacion, startDate, endDate, page);
-	}
-
-	@Override
 	public Page<Bienes_Estaciones> buscarPorAltaBien(String Alta, Pageable page) {
 		return bienesEstacionesRepo.findByBien_Alta(Alta, page);
 	}
@@ -92,5 +86,20 @@ public class BienesEstacionesJPA implements IBienes_Estaciones {
 	public Page<Bienes_Estaciones> buscarPorEstacion_IdAndBien_Alta(int idEstacion, String alta, Pageable page) {
 		return bienesEstacionesRepo.findByEstacion_IdAndBien_Alta(idEstacion, alta, page);
 	}
+
+	@Override
+	public List<Bienes_Estaciones> buscarCambiosPorPeriodoAndIdEstacion(int idEstacion, Date startDate, Date endDate) {
+		
+		return bienesEstacionesRepo.findByEstacion_IdAndActualizacionBetweenOrderByActualizacionDesc(idEstacion, startDate, endDate);
+	}
+
+	@Override
+	public Page<Bienes_Estaciones> buscarCambiosPorPeriodoAndIdEstacionPaginado(int idEstacion, Date startDate,
+			Date endDate, Pageable page) {
+		
+		return bienesEstacionesRepo.findByEstacion_IdAndActualizacionBetweenOrderByActualizacionDesc(idEstacion, startDate, endDate, page);
+	}
+
+
 
 }

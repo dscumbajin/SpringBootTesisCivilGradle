@@ -36,6 +36,13 @@
 	<jsp:include page="../includes/menu.jsp"></jsp:include>
 
 	<div class="container theme-showcase" role="main">
+		<c:if test="${mensaje!=null}">
+			<div class='alert alert-success' role="alert">${mensaje}</div>
+		</c:if>
+
+		<c:if test="${alerta!=null}">
+			<div class='alert alert-danger' role="alert">${alerta}</div>
+		</c:if>
 
 		<div class="col-lg-12">
 			<h2 class="text text-center">
@@ -44,14 +51,6 @@
 			</h2>
 			<hr class="featurette-divider">
 		</div>
-
-		<c:if test="${mensaje!=null}">
-			<div class='alert alert-success' role="alert">${mensaje}</div>
-		</c:if>
-
-		<c:if test="${alerta!=null}">
-			<div class='alert alert-danger' role="alert">${alerta}</div>
-		</c:if>
 
 		<div class="btn-toolbar" role="toolbar">
 

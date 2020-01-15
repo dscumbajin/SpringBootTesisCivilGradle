@@ -64,7 +64,7 @@ public class BienesServiceJPA implements IBienService {
 	public boolean exiteRegistroPorAltaAnterior(String alta, String anterior) {
 		return bienesRepo.existsByAltaAndAnterior(alta, anterior);
 	}
-	
+
 	@Override
 	public boolean existeRegistroPorALta(String alta) {
 		return bienesRepo.existsByAlta(alta);
@@ -91,8 +91,13 @@ public class BienesServiceJPA implements IBienService {
 	}
 
 	@Override
-	public Page<Bien> buscarPeriodo(Date startDate, Date endDate, Pageable page) {
-		return bienesRepo.findByPeriodo(startDate, endDate, page);
+	public Page<Bien> buscarPeriodoPaginado(Date startDate, Date endDate, Pageable page) {
+		return bienesRepo.findByPeriodoPaginado(startDate, endDate, page);
+	}
+
+	@Override
+	public List<Bien> buscarPeriodo(Date startDate, Date endDate) {
+		return bienesRepo.findByPeriodo(startDate, endDate);
 	}
 
 }

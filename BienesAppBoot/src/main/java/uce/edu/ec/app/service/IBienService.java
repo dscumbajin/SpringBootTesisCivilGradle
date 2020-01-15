@@ -32,16 +32,22 @@ public interface IBienService {
 	// Buscar Bien por input
 	Page<Bien> search(String input, Pageable page);
 
-	// Buscar Bien por periodo de Registro
-	Page<Bien> buscarPeriodo(Date startDate, Date endDate, Pageable page);
+	// Buscar Bien por periodo de Registros paginado
+	Page<Bien> buscarPeriodoPaginado(Date startDate, Date endDate, Pageable page);
+
+	// Buscar Bien por periodo de Registros
+	List<Bien> buscarPeriodo(Date startDate, Date endDate);
 
 	// Para controlar repetidos
 	boolean exiteRegistroPorAltaAnterior(String alta, String anterior);
 
+	// Existe el registro por alta nueva
 	boolean existeRegistroPorALta(String alta);
 
+	// Existe el registro por alta anterior
 	boolean existeRegistroPorAnterior(String anterior);
 
+	// Existe el registro por serie
 	boolean existeRegistroPorSerie(String serie);
 
 	// Para buscar todos los bienes que no estan asignados

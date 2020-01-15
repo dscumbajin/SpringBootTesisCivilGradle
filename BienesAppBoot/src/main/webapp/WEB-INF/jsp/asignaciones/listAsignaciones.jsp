@@ -80,7 +80,7 @@
 								<th>Bien</th>
 								<th>Ubicación</th>
 								<th>Lugar</th>
-								<th>Registro</th>
+								<th>Ingreso</th>
 								<th>Actualización</th>
 								<th>Opciones</th>
 							</tr>

@@ -36,11 +36,12 @@
 		<c:if test="${not empty alerta}">
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
-
-		<h3 class="blog-title">
-			<span class="label label-primary">Datos de la Estación</span>
-		</h3>
-
+		
+		<div class="page-header">
+			<h3 class="blog-title">
+				<span class="label label-primary">Datos de la Estación</span>
+			</h3>
+		</div>
 
 		<spring:hasBindErrors name="estacion">
 			<div class='alert alert-danger' role='alert'>

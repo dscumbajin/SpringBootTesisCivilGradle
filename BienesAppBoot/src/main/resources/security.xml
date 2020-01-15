@@ -11,7 +11,7 @@
 	<http auto-config="true">
 		<!-- Declaramos todos los recursos que estaran protegidos -->
 		<intercept-url pattern="/bienes/*"
-			access="hasAnyAuthority('ADMINISTRADOR', 'ESTANDAR')" />
+			access="hasAnyAuthority('ADMINISTRADOR','ESTANDAR')" />
 		<intercept-url pattern="/estaciones/*"
 			access="hasAnyAuthority('ADMINISTRADOR')" />
 		<intercept-url pattern="/asignaciones/*"

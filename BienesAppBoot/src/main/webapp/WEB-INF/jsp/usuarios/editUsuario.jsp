@@ -30,7 +30,7 @@
 
 	<div class="container theme-showcase" role="main">
 
-			<c:if test="${mensaje!=null}">
+		<c:if test="${mensaje!=null}">
 			<div class='alert alert-success' role="alert">${mensaje}</div>
 		</c:if>
 
@@ -38,12 +38,14 @@
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
 
-		<h3 class="blog-title">
-			<span class="label label-danger">Edición Usuario</span>
-		</h3>
+		<div class="page-header">
+			<h3 class="blog-title">
+				<span class="label label-danger">Edición Usuario</span>
+			</h3>
+		</div>
 
 		<div class="panel panel-default">
-			
+
 			<div class=" panel-body">
 				<form:form action="${urlForm}" method="post"
 					modelAttribute="usuario">
@@ -52,8 +54,8 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="perfil" class="control-label">PERFIL</label> <select
-									id="perfil" name="perfil"  class="form-control">
+								<label for="perfil" class="control-label">PERFÍL</label> <select
+									id="perfil" name="perfil" class="form-control">
 									<option value="ADMINISTRADOR">ADMINISTRADOR</option>
 									<option value="ESTANDAR">ESTANDAR</option>
 								</select>
@@ -99,7 +101,9 @@
 
 					<div class="btn-toolbar" role="toolbar">
 						<div class="btn-group">
-							<button type="submit" title="Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+							<button type="submit" title="Guardar" class="btn btn-primary">
+								<i class="fa fa-save"></i> Guardar
+							</button>
 						</div>
 
 						<div class="btn-group">
