@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +40,21 @@ import uce.edu.ec.app.util.PDFBuilder;
 @RequestMapping(value = "/bienes")
 public class BienesController {
 
+	@Value("${bien.guardar}")
+	private String mensajeGuardar;
+
+	@Value("${bien.eliminar}")
+	private String mensajeEliminar;
+
+	@Value("${bien.repetido.altanueva}")
+	private String mensajeRepetidoAltaNueva;
+	
+	@Value("${bien.repetido.altaanterior}")
+	private String mensajeRepetidoAltaAnterior;
+	
+	@Value("${bien.noexiste.bien.altanueva}")
+	private String mensajeNoExiste;
+	
 	@Autowired
 	private IBienService serviceBienes;
 
@@ -95,7 +111,7 @@ public class BienesController {
 			// Formulario con registro buscado
 			Page<Bien> lista = serviceBienes.search(token, page);
 			if (lista.isEmpty()) {
-				model.addAttribute("alerta", "No existe el Bien con Alta Nueva: " + token);
+				model.addAttribute("alerta", mensajeNoExiste + token);
 				busqueda = "";
 			} else {
 				model.addAttribute("bienes", lista);
@@ -146,13 +162,14 @@ public class BienesController {
 		System.out.println("alta: " + campo);
 
 		if (serviceBienes.existeRegistroPorALta(campo)) {
-			attributes.addFlashAttribute("alerta", "Ya existe un Bien con Alta Nueva: " + campo);
+			attributes.addFlashAttribute("alerta", mensajeRepetidoAltaNueva + campo);
 			return "redirect:/bienes/create";
 		} else if (serviceBienes.existeRegistroPorAnterior(campo)) {
-			attributes.addFlashAttribute("alerta", "Ya existe un Bien con Alta Anterior: " + campo);
+			attributes.addFlashAttribute("alerta", mensajeRepetidoAltaAnterior + campo);
 			return "redirect:/bienes/create";
 		} else {
-			attributes.addFlashAttribute("mensaje", "No existe el Bien con Alta Nueva: "+campo +" - ni Alta Anterior: "+campo );
+			attributes.addFlashAttribute("mensaje",
+					"No existe el Bien con Alta Nueva: " + campo + " - ni Alta Anterior: " + campo);
 			return "redirect:/bienes/create";
 		}
 	}
@@ -192,22 +209,22 @@ public class BienesController {
 		}
 
 		if (edicion == "") {
-
+			//Nuevo Bien
 			if (serviceBienes.existeRegistroPorALta(alta)) {
-				model.addAttribute("alerta", "Ya existe un Bien con Alta Nueva: " + alta);
+				model.addAttribute("alerta", mensajeRepetidoAltaNueva + alta);
 				return "bienes/formBien";
 			} else if (serviceBienes.existeRegistroPorAnterior(anterior)) {
-				model.addAttribute("alerta", "Ya existe un Bien con Alta Anterior: " + anterior);
+				model.addAttribute("alerta", mensajeRepetidoAltaAnterior + anterior);
 				return "bienes/formBien";
 			} else {
 				serviceDetalles.insertar(bien.getDetalle());
 				serviceBienes.insertar(bien);
-				attributes.addFlashAttribute("mensaje", "Bien registrado con exito");
+				attributes.addFlashAttribute("mensaje", mensajeGuardar);
 				return "redirect:/bienes/indexPaginate";
 			}
 
 		} else {
-
+			//Edicion
 			serviceDetalles.insertar(bien.getDetalle());
 			serviceBienes.insertar(bien);
 			attributes.addFlashAttribute("mensaje",
@@ -247,13 +264,13 @@ public class BienesController {
 			serviceAsignacion.eliminar(a);
 			serviceBienes.eliminar(idBien);
 			serviceDetalles.eliminar(bien.getDetalle().getId());
-			attributes.addFlashAttribute("mensaje", "Bien eliminado");
+			attributes.addFlashAttribute("mensaje", mensajeEliminar);
 			System.out.println("entra");
 		} else {
 			System.out.println("no entra");
 			serviceBienes.eliminar(idBien);
 			serviceDetalles.eliminar(bien.getDetalle().getId());
-			attributes.addFlashAttribute("mensaje", "Bien eliminado");
+			attributes.addFlashAttribute("mensaje", mensajeEliminar);
 		}
 
 		return "redirect:/bienes/indexPaginate";

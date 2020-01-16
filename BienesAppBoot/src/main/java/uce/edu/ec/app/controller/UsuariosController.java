@@ -1,6 +1,7 @@
 package uce.edu.ec.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,6 +25,18 @@ import uce.edu.ec.app.service.IUsuariosService;
 @RequestMapping("/usuarios")
 public class UsuariosController {
 
+	@Value("${usuario.guardar}")
+	private String mensajeGuardar;
+	
+	@Value("${usuario.eliminar}")
+	private String mensajeEliminar;
+	
+	@Value("${usuario.editar}")
+	private String mensajeEdicion;
+	
+	@Value("${usuario.repetido}")
+	private String mensajeRepetido;
+	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
@@ -56,7 +69,7 @@ public class UsuariosController {
 		}
 
 		if (serviceUsuarios.existePorCunetaEmail(cuenta, email)) {
-			model.addAttribute("alerta", "Ya existe un registro con cuenta: " + cuenta + " y email: " + email);
+			model.addAttribute("alerta", mensajeRepetido+" " + cuenta + " y email: " + email);
 			return "usuarios/newUser";
 
 		} else {
@@ -72,7 +85,7 @@ public class UsuariosController {
 			perfilTmp.setCuenta(usuario.getCuenta());
 			perfilTmp.setPerfil(perfil);
 			servicePerfiles.guardar(perfilTmp);
-			attributes.addFlashAttribute("mensaje", "Usuario Creado");
+			attributes.addFlashAttribute("mensaje", mensajeGuardar);
 			return "redirect:/formLogin";
 
 		}
@@ -100,7 +113,7 @@ public class UsuariosController {
 		p.setCuenta(usuario.getCuenta());
 		p.setPerfil(perfil);
 		servicePerfiles.guardar(p);
-		attributes.addFlashAttribute("mensaje", "El usuario fue editado");
+		attributes.addFlashAttribute("mensaje", mensajeEdicion);
 		return "redirect:/usuarios/indexPaginate";
 
 	}
@@ -120,7 +133,7 @@ public class UsuariosController {
 		Perfil perfil = servicePerfiles.buscarPorCuneta(usuario.getCuenta());
 		servicePerfiles.eliminar(perfil.getId());
 		serviceUsuarios.eliminar(idUsuario);
-		attributes.addFlashAttribute("mensaje", "Registro eliminado");
+		attributes.addFlashAttribute("mensaje", mensajeEliminar);
 		return "redirect:/usuarios/indexPaginate";
 	}
 

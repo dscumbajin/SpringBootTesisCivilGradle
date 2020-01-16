@@ -1,6 +1,7 @@
 package uce.edu.ec.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,18 @@ import uce.edu.ec.app.service.INoticiasService;
 @RequestMapping(value = "/noticias")
 public class NoticiasController {
 
+	@Value("${noticia.guardar}")
+	private String mensajeGuardar;
+	
+	@Value("${noticia.eliminar}")
+	private String mensajeEliminar;
+	
+	@Value("${noticia.editar}")
+	private String mensajeEdicion;
+	
+	@Value("${noticia.repetida}")
+	private String mensajeRepetido;
+	
 	// Inyectamos una instancia desde nuestro Root ApplicationContext
 	@Autowired
 	private INoticiasService serviceNoticias;
@@ -59,17 +72,19 @@ public class NoticiasController {
 		// Insertamos la noticia
 
 		if (edicion == "") {
+			//nuevo
 			if (serviceNoticias.existePorTitulo(titulo)) {
-				model.addAttribute("alerta", "Ya existe un registro con titulo: " + titulo);
+				model.addAttribute("alerta", mensajeRepetido + titulo);
 				return "noticias/formNoticia";
 			} else {
 				serviceNoticias.guardar(noticia);
-				attributes.addFlashAttribute("msg", "Los datos de la noticia fueron guardados!");
+				attributes.addFlashAttribute("mensaje", mensajeGuardar);
 				return "redirect:/noticias/indexPaginate";
 			}
 		} else {
+			//edición
 			serviceNoticias.guardar(noticia);
-			attributes.addFlashAttribute("msg", "Los datos de la noticia fueron modificados!");
+			attributes.addFlashAttribute("mensaje", mensajeEdicion);
 			edicion = "";
 			return "redirect:/noticias/indexPaginate";
 		}
@@ -87,7 +102,7 @@ public class NoticiasController {
 	@GetMapping(value = "/delete/{id}")
 	public String eliminar(@PathVariable("id") int idNoticia, RedirectAttributes attributes) {
 		serviceNoticias.eliminar(idNoticia);
-		attributes.addFlashAttribute("msg", "La noticia fue eliminada!.");
+		attributes.addFlashAttribute("mensaje", mensajeEliminar);
 
 		return "redirect:/noticias/indexPaginate";
 	}

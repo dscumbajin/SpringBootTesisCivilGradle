@@ -34,6 +34,15 @@ public class EstacionController {
 	@Value("${bienesapp.ruta.imagenes}")
 	private String ruta;
 	
+	@Value("${estacion.guardar}")
+	private String mensajeGuardar;
+	
+	@Value("${estacion.eliminar}")
+	private String mensajeEliminar;
+	
+	@Value("${estacion.editar}")
+	private String mensajeEdicion;
+	
 	@Autowired
 	private IEstacionService servicioEstaciones;
 
@@ -69,7 +78,7 @@ public class EstacionController {
 		} else {
 			Page<Estacion> lista = servicioEstaciones.buscarPorLugar(token, page);
 			if (lista.isEmpty()) {
-				model.addAttribute("alerta", "No existe el registro con Lugar: "+token);
+				model.addAttribute("alerta", "No existe una estación con Lugar: "+token);
 				busqueda = "";
 			} else {
 				model.addAttribute("estaciones", lista);
@@ -104,7 +113,7 @@ public class EstacionController {
 					}
 				}
 				servicioEstaciones.insertar(estacion);
-				attributes.addFlashAttribute("mensaje", "El registro fue guardado");
+				attributes.addFlashAttribute("mensaje", mensajeGuardar);
 				return "redirect:/estaciones/indexPaginate";// redireccionamos a un nuevo formmulario
 
 			}
@@ -119,7 +128,7 @@ public class EstacionController {
 				}
 			}
 			servicioEstaciones.insertar(estacion);
-			attributes.addFlashAttribute("mensaje", "El registro fue editado");
+			attributes.addFlashAttribute("mensaje", mensajeEdicion);
 			edicion = "";
 			return "redirect:/estaciones/indexPaginate";// redireccionamos a un nuevo formmulario
 
@@ -146,7 +155,7 @@ public class EstacionController {
 
 		if (listaEstaciones.size() == 0) {
 			servicioEstaciones.eliminar(idEstacion);
-			attributes.addFlashAttribute("mensaje", "Registro eliminado");
+			attributes.addFlashAttribute("mensaje", mensajeEliminar);
 		} else {
 			for (Bienes_Estaciones b : listaEstaciones) {
 				System.out.println(b.toString());
@@ -159,7 +168,7 @@ public class EstacionController {
 				serviceAsignacion.eliminar(id);
 			}
 			servicioEstaciones.eliminar(idEstacion);
-			attributes.addFlashAttribute("mensaje", "Registro eliminado");
+			attributes.addFlashAttribute("mensaje", mensajeEliminar);
 		}
 		return "redirect:/estaciones/indexPaginate";
 	}

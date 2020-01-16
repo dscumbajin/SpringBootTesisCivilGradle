@@ -28,6 +28,19 @@ public class BannersController {
 	
 	@Value("${bienesapp.ruta.imagenes}")
 	private String ruta;
+	
+	@Value("${banner.guardar}")
+	private String mensajeGuardar;
+	
+	@Value("${banner.eliminar}")
+	private String mensajeEliminar;
+	
+	@Value("${banner.editar}")
+	private String mensajeEdicion;
+	
+	@Value("${banner.repetida}")
+	private String mensajeRepetido;
+	
 
 	@Autowired
 	private IBannersService serviceBanners;
@@ -86,7 +99,7 @@ public class BannersController {
 
 		if (edicion == "") {
 			if (serviceBanners.existePorTitulo(titulo)) {
-				model.addAttribute("alerta", "Ya existe un registro con titulo: " + titulo);
+				model.addAttribute("alerta", mensajeRepetido + titulo);
 				return "banners/formBanner";
 			} else {
 				if (!multiPart.isEmpty()) {
@@ -95,7 +108,7 @@ public class BannersController {
 				}
 
 				serviceBanners.insertar(banner);
-				attributes.addFlashAttribute("mensaje", "El registro fue guardado");
+				attributes.addFlashAttribute("mensaje", mensajeGuardar);
 				return "redirect:/banners/indexPaginate";
 			}
 		} else {
@@ -107,7 +120,7 @@ public class BannersController {
 				}
 			}
 			serviceBanners.insertar(banner);
-			attributes.addFlashAttribute("mensaje", "El registro fue editado");
+			attributes.addFlashAttribute("mensaje", mensajeEdicion);
 			edicion = "";
 			return "redirect:/banners/indexPaginate";
 		}
@@ -127,7 +140,7 @@ public class BannersController {
 	@GetMapping(value = "delete/{id}")
 	public String eliminar(@PathVariable("id") int idBanner, RedirectAttributes attributes) {
 		serviceBanners.eliminar(idBanner);
-		attributes.addFlashAttribute("mensaje", "Registro eliminado");
+		attributes.addFlashAttribute("mensaje", mensajeEliminar);
 		return "redirect:/banners/indexPaginate";
 	}
 

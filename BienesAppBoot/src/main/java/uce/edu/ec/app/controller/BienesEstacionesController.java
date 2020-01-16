@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +33,21 @@ import uce.edu.ec.app.service.IEstacionService;
 @Controller
 @RequestMapping(value = "/asignaciones")
 public class BienesEstacionesController {
+
+	@Value("${asignacion.guardar}")
+	private String mensajeGuardar;
+
+	@Value("${bien.noexiste.bien.altanueva}")
+	private String mensajeNoExiste;
+
+	@Value("${asignacion.editar}")
+	private String mensajeEdicion;
+
+	@Value("${asignacion.error}")
+	private String mensajeError;
+
+	@Value("${asignacion.eliminar}")
+	private String mensajeEliminar;
 
 	@Autowired
 	private IBienes_Estaciones servicioBienesEstaciones;
@@ -67,13 +83,13 @@ public class BienesEstacionesController {
 		} else {
 			Page<Bienes_Estaciones> listaAsignaciones = servicioBienesEstaciones.buscarPorAltaBien(token, page);
 			if (listaAsignaciones.isEmpty()) {
-				model.addAttribute("alerta", "No existe el registro con Alta Nueva: " +token);
+				model.addAttribute("alerta", mensajeNoExiste + token);
 				busqueda = "";
 			} else {
 				model.addAttribute("asignaciones", listaAsignaciones);
 				busqueda = "";
-			}	
-			
+			}
+
 		}
 		return "asignaciones/listAsignaciones";
 	}
@@ -86,8 +102,9 @@ public class BienesEstacionesController {
 	// Manejo de Errores
 	@PostMapping(value = "/save")
 	public String guardar(@ModelAttribute Bienes_Estaciones bienes_Estaciones, BindingResult result,
-			RedirectAttributes attributes, @RequestParam("id") int id, @RequestParam(name ="bien.id",required = false ) String idBien,
-			@RequestParam(name ="estacion.id", required = false) String idEstacion, Model model) {
+			RedirectAttributes attributes, @RequestParam("id") int id,
+			@RequestParam(name = "bien.id", required = false) String idBien,
+			@RequestParam(name = "estacion.id", required = false) String idEstacion, Model model) {
 
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");
@@ -101,12 +118,13 @@ public class BienesEstacionesController {
 				if (servicioBienesEstaciones.existeRegistroPorIdBienIdEstacion(Integer.parseInt(idBien),
 						Integer.parseInt(idEstacion))) {
 					model.addAttribute("alerta",
-							"Ya existe un registro con id Bien: " + idBien + " y id Estacion: " + idEstacion);
+							"Ya fue asignado el Bien: " + idBien + " a una Estación: " + idEstacion);
 					return "asignaciones/formAsignaciones";
 				} else {
 
 					System.out.println("Id bien asignado: " + idBien);
 					Bien bien = servicioBienes.buscarPorId(Integer.parseInt(idBien));
+					Estacion estacion = servicioEstaciones.buscarPorId(Integer.parseInt(idEstacion));
 					bien.setControl("Inactivo");
 					servicioBienes.insertar(bien);
 					bienes_Estaciones.setRegistro(bien.getFecha_ingreso());
@@ -114,7 +132,8 @@ public class BienesEstacionesController {
 
 					System.out.println(bien.toString());
 					servicioBienesEstaciones.insertar(bienes_Estaciones);
-					attributes.addFlashAttribute("mensaje", "El registro fue guardado");
+					attributes.addFlashAttribute("mensaje",
+							mensajeGuardar + " del " + "Bien: " + bien.getDescripcion() +"con Alta: "+ bien.getAlta()+ " en " + estacion.getLugar());
 					// redireccionamos a un nuevo formmulario
 					return "redirect:/asignaciones/indexPaginate";
 				}
@@ -123,6 +142,7 @@ public class BienesEstacionesController {
 
 				// edicion
 				bienes_Estaciones = servicioBienesEstaciones.buscarPorId(id);
+				Bien reubicacion = servicioBienes.buscarPorAlta(bienes_Estaciones.getBien().getAlta());
 				Estacion lugar = servicioEstaciones.buscarPorId(Integer.parseInt(idEstacion));
 				System.out.println("Antes:" + bienes_Estaciones);
 
@@ -131,7 +151,9 @@ public class BienesEstacionesController {
 					bienes_Estaciones.setActualizacion(new Date());
 					servicioBienesEstaciones.insertar(bienes_Estaciones);
 					System.out.println("Despues:" + bienes_Estaciones);
-					attributes.addFlashAttribute("mensaje", "El registro fue editado");
+					attributes.addFlashAttribute("mensaje",
+							mensajeEdicion + " del " + "Bien: " + reubicacion.getDescripcion() + " con Alta: "
+									+ reubicacion.getAlta() + " en " + lugar.getLugar());
 
 				} else {
 					bienes_Estaciones.setRegistro(bienes_Estaciones.getActualizacion());
@@ -139,13 +161,15 @@ public class BienesEstacionesController {
 					bienes_Estaciones.setActualizacion(new Date());
 					servicioBienesEstaciones.insertar(bienes_Estaciones);
 					System.out.println("Despues:" + bienes_Estaciones);
-					attributes.addFlashAttribute("mensaje", "El registro fue editado");
+					attributes.addFlashAttribute("mensaje",
+							mensajeEdicion + " del " + "Bien: " + reubicacion.getDescripcion() + " con Alta: "
+									+ reubicacion.getAlta() + " en " + lugar.getLugar());
 				}
 
 				edicion = "";
 			}
 		} catch (Exception alerta) {
-			System.out.println("El error fue: "+ attributes.addFlashAttribute("alerta", "Error al Asignar"));
+			System.out.println("El error fue: " + attributes.addFlashAttribute("alerta", mensajeError));
 		}
 
 		return "redirect:/asignaciones/indexPaginate";
@@ -169,7 +193,7 @@ public class BienesEstacionesController {
 		bien.setControl("Activo");
 		servicioBienes.insertar(bien);
 		servicioBienesEstaciones.eliminar(id);
-		attributes.addFlashAttribute("mensaje", "Registro eliminado");
+		attributes.addFlashAttribute("mensaje", mensajeEliminar);
 		return "redirect:/asignaciones/indexPaginate";
 	}
 
