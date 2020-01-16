@@ -64,6 +64,7 @@ public class BienesEstacionesController {
 
 	private String token = "";
 
+	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 	@GetMapping(value = "/index")
@@ -132,8 +133,8 @@ public class BienesEstacionesController {
 
 					System.out.println(bien.toString());
 					servicioBienesEstaciones.insertar(bienes_Estaciones);
-					attributes.addFlashAttribute("mensaje",
-							mensajeGuardar + " del " + "Bien: " + bien.getDescripcion() +"con Alta: "+ bien.getAlta()+ " en " + estacion.getLugar());
+					attributes.addFlashAttribute("mensaje", mensajeGuardar + " del " + "Bien: " + bien.getDescripcion()
+							+ "con Alta: " + bien.getAlta() + " en " + estacion.getLugar());
 					// redireccionamos a un nuevo formmulario
 					return "redirect:/asignaciones/indexPaginate";
 				}

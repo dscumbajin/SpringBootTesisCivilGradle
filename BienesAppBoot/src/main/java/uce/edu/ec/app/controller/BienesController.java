@@ -162,10 +162,14 @@ public class BienesController {
 		System.out.println("alta: " + campo);
 
 		if (serviceBienes.existeRegistroPorALta(campo)) {
-			attributes.addFlashAttribute("alerta", mensajeRepetidoAltaNueva + campo);
+			Bien bienNuevo =serviceBienes.buscarPorAlta(campo);
+			Bienes_Estaciones bienes_Estaciones = serviceAsignacion.buscarIdPorIdBien(bienNuevo.getId());
+			attributes.addFlashAttribute("alerta", mensajeRepetidoAltaNueva + campo + " ubicado en: "+ bienes_Estaciones.getEstacion().getLugar());
 			return "redirect:/bienes/create";
 		} else if (serviceBienes.existeRegistroPorAnterior(campo)) {
-			attributes.addFlashAttribute("alerta", mensajeRepetidoAltaAnterior + campo);
+			Bien bienAnterior = serviceBienes.buscarPorAltaAnterior(campo);
+			Bienes_Estaciones bienes_Estaciones = serviceAsignacion.buscarIdPorIdBien(bienAnterior.getId());
+			attributes.addFlashAttribute("alerta", mensajeRepetidoAltaAnterior + campo + " ubicado en: "+ bienes_Estaciones.getEstacion().getLugar());
 			return "redirect:/bienes/create";
 		} else {
 			attributes.addFlashAttribute("mensaje",

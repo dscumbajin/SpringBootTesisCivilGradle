@@ -100,4 +100,10 @@ public class BienesServiceJPA implements IBienService {
 		return bienesRepo.findByPeriodo(startDate, endDate);
 	}
 
+	@Override
+	public Bien buscarPorAltaAnterior(String alta) {
+
+		return bienesRepo.findByAnterior(alta);
+	}
+
 }

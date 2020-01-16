@@ -25,16 +25,21 @@ public interface IBienes_Estaciones {
 
 	// Listar registros que se han cambiado en un periodo de tiempo por idEstacion
 	List<Bienes_Estaciones> buscarCambiosPorPeriodoAndIdEstacion(int idEstacion, Date startDate, Date endDate);
-	
-	// Listar registros que se han cambiado en un periodo de tiempo por idEstacion paginado
-	Page<Bienes_Estaciones> buscarCambiosPorPeriodoAndIdEstacionPaginado(int idEstacion, Date startDate, Date endDate, Pageable page);
 
-	// Buscar por alta del bien
+	// Listar registros que se han cambiado en un periodo de tiempo por idEstacion
+	// paginado
+	Page<Bienes_Estaciones> buscarCambiosPorPeriodoAndIdEstacionPaginado(int idEstacion, Date startDate, Date endDate,
+			Pageable page);
+
+	// Buscar por alta nueva  del bien
 	Page<Bienes_Estaciones> buscarPorAltaBien(String Alta, Pageable page);
 
-	//Filtro de detalle
+	// Buscar por alta anterior del bien
+	Page<Bienes_Estaciones> buscarPorAltaAnteriorBien(String anterior, Pageable page);
+
+	// Filtro de detalle
 	Page<Bienes_Estaciones> buscarPorEstacion_IdAndBien_Alta(int idEstacion, String alta, Pageable page);
-	
+
 	// Buscar por id
 	Bienes_Estaciones buscarPorId(int id);
 
@@ -52,6 +57,5 @@ public interface IBienes_Estaciones {
 
 	// Controlar repetidos
 	boolean existeRegistroPorIdBienIdEstacion(int idBien, int idEstacion);
-	
 
 }

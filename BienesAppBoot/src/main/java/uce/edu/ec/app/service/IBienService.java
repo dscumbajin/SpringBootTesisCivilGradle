@@ -17,8 +17,11 @@ public interface IBienService {
 	// Buscar por id
 	Bien buscarPorId(int idBien);
 
-	// buecar por alta
+	// busqueda por alta nueva
 	Bien buscarPorAlta(String alta);
+	
+	// Busqueda por alta anterior
+	Bien buscarPorAltaAnterior(String alta);
 
 	// existe por id
 	boolean existePorId(int id);
