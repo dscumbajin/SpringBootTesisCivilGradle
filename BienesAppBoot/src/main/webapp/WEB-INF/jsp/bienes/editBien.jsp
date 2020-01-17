@@ -144,6 +144,14 @@
 							id="garantia" required="required" autocomplete="off" />
 					</div>
 				</div>
+				
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="fecha_ingreso">Fecha de Ingreso</label>
+						<form:input type="text" class="form-control" path="fecha_ingreso"
+							id="fecha_ingreso" required="required" autocomplete="off" />
+					</div>
+				</div>
 
 				<div class="col-sm-3">
 					<div class="form-group">
@@ -284,6 +292,13 @@
 	<script>
 		$(function() {
 			$("#garantia").datepicker({
+				dateFormat : 'dd-mm-yy'
+			});
+		});
+	</script>
+	<script>
+		$(function() {
+			$("#fecha_ingreso").datepicker({
 				dateFormat : 'dd-mm-yy'
 			});
 		});
