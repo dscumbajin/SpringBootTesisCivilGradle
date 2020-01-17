@@ -48,13 +48,13 @@ public class BienesController {
 
 	@Value("${bien.repetido.altanueva}")
 	private String mensajeRepetidoAltaNueva;
-	
+
 	@Value("${bien.repetido.altaanterior}")
 	private String mensajeRepetidoAltaAnterior;
-	
+
 	@Value("${bien.noexiste.bien.altanueva}")
 	private String mensajeNoExiste;
-	
+
 	@Autowired
 	private IBienService serviceBienes;
 
@@ -162,14 +162,40 @@ public class BienesController {
 		System.out.println("alta: " + campo);
 
 		if (serviceBienes.existeRegistroPorALta(campo)) {
-			Bien bienNuevo =serviceBienes.buscarPorAlta(campo);
-			Bienes_Estaciones bienes_Estaciones = serviceAsignacion.buscarIdPorIdBien(bienNuevo.getId());
-			attributes.addFlashAttribute("alerta", mensajeRepetidoAltaNueva + campo + " ubicado en: "+ bienes_Estaciones.getEstacion().getLugar());
+			Bien bienNuevo = serviceBienes.buscarPorAlta(campo);
+			try {
+				if (bienNuevo.getControl() == "Activo") {
+					attributes.addFlashAttribute("alerta",
+							"Ya existe un Bien con Alta Nueva: " + campo + " y no se encuentra asignado a un lugar");
+				} else {
+
+					Bienes_Estaciones bienes_Estaciones = serviceAsignacion.buscarIdPorIdBien(bienNuevo.getId());
+					attributes.addFlashAttribute("alerta", mensajeRepetidoAltaNueva + campo + " ubicado en: "
+							+ bienes_Estaciones.getEstacion().getLugar());
+
+				}
+			} catch (Exception e) {
+				attributes.addFlashAttribute("alerta",
+						"Ya existe un Bien con Alta Nueva: " + campo + " y no se encuentra asignado a un lugar");
+			}
 			return "redirect:/bienes/create";
 		} else if (serviceBienes.existeRegistroPorAnterior(campo)) {
 			Bien bienAnterior = serviceBienes.buscarPorAltaAnterior(campo);
-			Bienes_Estaciones bienes_Estaciones = serviceAsignacion.buscarIdPorIdBien(bienAnterior.getId());
-			attributes.addFlashAttribute("alerta", mensajeRepetidoAltaAnterior + campo + " ubicado en: "+ bienes_Estaciones.getEstacion().getLugar());
+			try {
+				if (bienAnterior.getControl() == "Activo") {
+					attributes.addFlashAttribute("alerta",
+							"Ya existe un Bien con Alta Anterior: " + campo + " y no se encuentra asignado a un lugar");
+				} else {
+
+					Bienes_Estaciones bienes_Estaciones = serviceAsignacion.buscarIdPorIdBien(bienAnterior.getId());
+					attributes.addFlashAttribute("alerta", mensajeRepetidoAltaAnterior + campo + " ubicado en: "
+							+ bienes_Estaciones.getEstacion().getLugar());
+				}
+			} catch (Exception e) {
+				attributes.addFlashAttribute("alerta",
+						"Ya existe un Bien con Alta Anterior: " + campo + " y no se encuentra asignado a un lugar");
+			}
+
 			return "redirect:/bienes/create";
 		} else {
 			attributes.addFlashAttribute("mensaje",
@@ -213,7 +239,7 @@ public class BienesController {
 		}
 
 		if (edicion == "") {
-			//Nuevo Bien
+			// Nuevo Bien
 			if (serviceBienes.existeRegistroPorALta(alta)) {
 				model.addAttribute("alerta", mensajeRepetidoAltaNueva + alta);
 				return "bienes/formBien";
@@ -228,7 +254,7 @@ public class BienesController {
 			}
 
 		} else {
-			//Edicion
+			// Edicion
 			serviceDetalles.insertar(bien.getDetalle());
 			serviceBienes.insertar(bien);
 			attributes.addFlashAttribute("mensaje",
