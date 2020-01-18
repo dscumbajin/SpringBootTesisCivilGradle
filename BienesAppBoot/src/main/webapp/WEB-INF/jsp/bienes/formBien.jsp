@@ -58,7 +58,7 @@
 		<c:if test="${not empty alerta}">
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
-		
+
 		<c:if test="${mensaje!=null}">
 			<div class='alert alert-success' role="alert">${mensaje}</div>
 		</c:if>
@@ -88,14 +88,14 @@
 						<form:hidden path="id" />
 						<form:hidden path="detalle.id" />
 						<form:input type="text" class="form-control" path="alta" id="alta"
-							required="required" autocomplete="off" />
+							autocomplete="off" required="required" />
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="anterior">Alta Anterior</label>
 						<form:input type="text" class="form-control" path="anterior"
-							id="anterior" required="required" autocomplete="off" />
+							id="anterior" autocomplete="off" required="required" />
 					</div>
 				</div>
 				<div class="col-sm-3">
@@ -161,7 +161,8 @@
 					<div class="form-group">
 						<label for="color">Color</label>
 						<form:input type="text" class="form-control" path="color"
-							id="color" required="required" placeholder="Plomo - Azul - Negro -?"
+							id="color" required="required"
+							placeholder="Plomo - Azul - Negro -?"
 							pattern="|^[a-zA-Z]+(\s*[a-zA-Z]*)*[a-zA-Z]+$|" />
 					</div>
 				</div>
@@ -169,7 +170,8 @@
 					<div class="form-group">
 						<label for="material">Material</label>
 						<form:input type="text" class="form-control" path="material"
-							id="material" required="required" placeholder="Plástico - Metal - ?"
+							id="material" required="required"
+							placeholder="Plástico - Metal - ?"
 							pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" />
 					</div>
 				</div>
@@ -305,6 +307,6 @@
 			});
 		});
 	</script>
-	
+
 </body>
 </html>

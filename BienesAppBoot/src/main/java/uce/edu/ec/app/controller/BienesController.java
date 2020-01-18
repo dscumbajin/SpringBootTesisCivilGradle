@@ -77,6 +77,7 @@ public class BienesController {
 	private Date fin = null;
 
 	private List<Bien> bienesPorPeriodo;
+
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 	/**
@@ -230,8 +231,7 @@ public class BienesController {
 	@PostMapping(value = "/save")
 	public String guardar(@ModelAttribute Bien bien, Model model, BindingResult result, RedirectAttributes attributes,
 			@RequestParam(name = "alta", required = false) String alta,
-			@RequestParam(name = "anterior", required = false) String anterior,
-			@RequestParam(name = "serie", required = false) String serie) {
+			@RequestParam(name = "anterior", required = false) String anterior) {
 
 		if (result.hasErrors()) {
 			System.out.println("Existen errores");

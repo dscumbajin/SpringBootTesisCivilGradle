@@ -46,6 +46,7 @@ public class Bien implements Serializable {
 	private List<Bienes_Estaciones> registro;
 
 	public Bien() {
+
 		this.fecha_ingreso = new Date();
 		this.control = "Activo";
 	}

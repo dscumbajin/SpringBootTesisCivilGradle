@@ -46,4 +46,14 @@ public class Utileria {
 		}
 		return builder.toString();
 	}
+	
+	public static String randoNumeric(int count) {
+		String CARACTERES = "0123456789";
+		StringBuilder builder = new StringBuilder();
+		while (count-- != 0) {
+			int character = (int) (Math.random() * CARACTERES.length());
+			builder.append(CARACTERES.charAt(character));
+		}
+		return builder.toString();
+	}
 }
