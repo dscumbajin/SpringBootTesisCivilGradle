@@ -242,8 +242,8 @@
 					<div class="form-group">
 						<label for="tipo" class="control-label">Tipo</label>
 						<form:select id="tipo" path="detalle.tipo" class="form-control">
-							<form:option value="MOBILIARIO"> MOBILIARIO</form:option>
 							<form:option value="MAQUINARIA Y EQUIPO"> MAQUINARIA Y EQUIPO</form:option>
+							<form:option value="MOBILIARIO"> MOBILIARIO</form:option>
 						</form:select>
 					</div>
 				</div>
