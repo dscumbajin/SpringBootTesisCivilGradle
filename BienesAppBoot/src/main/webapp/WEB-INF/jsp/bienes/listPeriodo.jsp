@@ -12,7 +12,7 @@
 <meta name="author" content="">
 <title>Reporte por Periodos</title>
 <spring:url value="" var="urlPublic" />
-<spring:url value="/bienes/cancel" var="urlCancel"></spring:url>
+<spring:url value="/bienes/cancelReporte" var="urlCancel"></spring:url>
 <spring:url value="/bienes/buscar" var="urlBuscar" />
 <spring:url value="/bienes" var="urlBienes" />
 <spring:url value="/bienes/periodo?type=excel" var="urlXLS" />

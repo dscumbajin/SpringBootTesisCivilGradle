@@ -24,8 +24,13 @@ public interface BienesRepository extends JpaRepository<Bien, Integer> {
 	List<Bien> findByPeriodo(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
 	// Busqueda de bines por alta //Paginado
-	@Query(value = "SELECT * FROM BIENES WHERE ALTA = ?1", nativeQuery = true)
-	//@Query(value = "SELECT * FROM Bienes b WHERE b.alta like %:input% or b.anterior like %:input% ORDER BY garantia DESC", nativeQuery = true)
+	// @Query(value = "SELECT * FROM BIENES WHERE ALTA = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM Bienes b WHERE b.alta like %:alta% or b.anterior like %:alta% ORDER BY garantia DESC", nativeQuery = true)
+	List<Bien> findByInputSinPaginar(@Param("alta") String input);
+
+	// Busqueda de bines por alta //Paginado
+	// @Query(value = "SELECT * FROM BIENES WHERE ALTA = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM Bienes b WHERE b.alta like %:alta% or b.anterior like %:alta% ORDER BY garantia DESC", nativeQuery = true)
 	Page<Bien> findByInput(@Param("alta") String input, Pageable page);
 
 	// Lista todos los bienes oredenados por fecha de ingreso descendente

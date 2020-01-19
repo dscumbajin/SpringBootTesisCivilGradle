@@ -48,7 +48,7 @@ public class HomeController {
 	private IBienes_Estaciones serviceAsignaciones;
 
 	private int idEstacionB = 0;
-	
+
 	private int numEquipos = 0;
 
 	private String busqueda = "";
@@ -62,6 +62,8 @@ public class HomeController {
 	private Date fin = null;
 
 	private List<Bienes_Estaciones> cambioPeriodoDetalle;
+
+	private List<Bienes_Estaciones> BienEstacionBuscados ;
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -80,7 +82,9 @@ public class HomeController {
 	public String mostrarDetalle(Model model, @RequestParam("idEstacion") int idEstacion, Pageable page) {
 
 		Page<Bienes_Estaciones> bienes_Estaciones = serviceAsignaciones.buscarPorIdEstacion(idEstacion, page);
-		numEquipos = bienes_Estaciones.getContent().size();
+		List<Bienes_Estaciones> numBienesEstaciones = serviceAsignaciones.buscarIdPorIdEstacion(idEstacion);
+		numEquipos = numBienesEstaciones.size();
+		BienEstacionBuscados = numBienesEstaciones;
 		model.addAttribute("numEquipo", numEquipos);
 		model.addAttribute("bienes_Estaciones", bienes_Estaciones);
 		model.addAttribute("estacion", serviceEstaciones.buscarPorId(idEstacion));
@@ -96,6 +100,8 @@ public class HomeController {
 		model.addAttribute("estacion", serviceEstaciones.buscarPorId(idEstacionB));
 		if (busqueda == "") {
 			Page<Bienes_Estaciones> bienes_Estaciones = serviceAsignaciones.buscarPorIdEstacion(idEstacionB, page);
+			List<Bienes_Estaciones> numBienesEstaciones = serviceAsignaciones.buscarIdPorIdEstacion(idEstacionB);
+			BienEstacionBuscados = numBienesEstaciones;
 			model.addAttribute("bienes_Estaciones", bienes_Estaciones);
 
 		} else {
@@ -103,9 +109,12 @@ public class HomeController {
 					.buscarPorEstacion_IdAndBien_Alta(idEstacionB, token, page);
 
 			if (bienes_Estaciones.isEmpty()) {
+				BienEstacionBuscados = bienes_Estaciones.getContent();
 				model.addAttribute("alerta", "No existe el registro con Alta Nueva: " + token);
 				busqueda = "";
 			} else {
+				List<Bienes_Estaciones> reporte = serviceAsignaciones.buscarPorEstacion_IdAndBien_AltaSinPaginar(idEstacionB, token);
+				BienEstacionBuscados = reporte;
 				model.addAttribute("bienes_Estaciones", bienes_Estaciones);
 				busqueda = "";
 			}
@@ -132,7 +141,7 @@ public class HomeController {
 
 		} else if (paginado == "si") {
 			// Formulario con busqueda personalizada
-			
+
 			model.addAttribute("estacion", serviceEstaciones.buscarPorId(idEstacionB));
 
 			Page<Bienes_Estaciones> bienes_Estaciones_Paginado = serviceAsignaciones
@@ -178,7 +187,7 @@ public class HomeController {
 	public ModelAndView getReport(HttpServletRequest request, HttpServletResponse response) {
 		String reportType = request.getParameter("type");
 		// Todos los bienes pero por id de estacion
-		List<Bienes_Estaciones> bienes_Estaciones = serviceAsignaciones.buscarIdPorIdEstacion(idEstacionB);
+		List<Bienes_Estaciones> bienes_Estaciones = BienEstacionBuscados;
 
 		if (reportType != null && reportType.equals("excel")) {
 			return new ModelAndView(new ExcelBuilderDetalle(), "bienes_Estaciones", bienes_Estaciones);

@@ -23,7 +23,7 @@ import uce.edu.ec.app.model.Bienes_Estaciones;
 public class ExcelBuilderDetalle extends AbstractXlsView {
 
 	private Date name = new Date();
-
+	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	@SuppressWarnings("deprecation")

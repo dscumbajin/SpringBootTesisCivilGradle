@@ -30,10 +30,11 @@ import uce.edu.ec.app.model.Bien;
 
 @Component
 public class PDFBuilder extends AbstractITextPdfView {
-	
+
 	Font ffont = new Font(FontFamily.HELVETICA, 10f, Font.BOLD);
 	Font ffont2 = new Font(FontFamily.HELVETICA, 8f);
 	
+	private int contador = 1;
 
 	SimpleDateFormat dateFormatLarg = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -69,14 +70,14 @@ public class PDFBuilder extends AbstractITextPdfView {
 
 			PdfPTable table = new PdfPTable(19);
 			table.setWidthPercentage(100.0f);
-			table.setWidths(new float[] {1f, 1.3f, 1.3f, 2.1f, 2.8f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.5f, 2.1f,
+			table.setWidths(new float[] { 1f, 1.3f, 1.3f, 2.1f, 2.8f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.8f, 2.1f,
 					1.3f, 1.3f, 2.1f, 1.3f, 1.3f, 2.1f });
 			table.setSpacingBefore(10);
 			table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
 			// Tamaño letra Encabezados
 			Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 10);
 			font.setColor(BaseColor.WHITE);
-			//Tamaño letra Contenido Celdas
+			// Tamaño letra Contenido Celdas
 			Font ffont = new Font(FontFamily.HELVETICA, 10);
 
 			// define table header cell
@@ -130,9 +131,9 @@ public class PDFBuilder extends AbstractITextPdfView {
 			table.addCell(cell);
 
 			try {
-				// write table row data
+
 				for (Bien bien : bienes) {
-					cell = new PdfPCell(new Phrase(String.valueOf(bien.getId()), ffont));
+					cell = new PdfPCell(new Phrase(String.valueOf(contador), ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
 					cell = new PdfPCell(new Phrase(bien.getAlta(), ffont));
@@ -189,6 +190,7 @@ public class PDFBuilder extends AbstractITextPdfView {
 					cell = new PdfPCell(new Phrase(bien.getDetalle().getTipo(), ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
+					contador++;
 				}
 
 				doc.add(table);

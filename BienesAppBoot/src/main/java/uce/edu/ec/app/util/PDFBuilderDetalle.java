@@ -34,6 +34,8 @@ public class PDFBuilderDetalle extends AbstractITextPdfView {
 	SimpleDateFormat dateFormatLarg = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
+	private int contador = 1;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void buildPdfDocument(Map<String, Object> model, Document doc, PdfWriter writer,
@@ -66,7 +68,7 @@ public class PDFBuilderDetalle extends AbstractITextPdfView {
 			PdfPTable table = new PdfPTable(14);
 			table.setWidthPercentage(100.0f);
 			table.setWidths(
-					new float[] { 1.0f, 1.0f, 1.0f, 1.0f, 2.0f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f });
+					new float[] { 1.0f, 1.5f, 1.0f, 1.0f, 2.0f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f });
 			table.setSpacingBefore(10);
 			table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
 			// define font for table header row
@@ -119,7 +121,7 @@ public class PDFBuilderDetalle extends AbstractITextPdfView {
 			// write table row data
 			try {
 				for (Bienes_Estaciones bien_Estacion : bienes_Estaciones) {
-					cell = new PdfPCell(new Phrase(String.valueOf(bien_Estacion.getId()), ffont));
+					cell = new PdfPCell(new Phrase(String.valueOf(contador), ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
 					cell = new PdfPCell(new Phrase(bien_Estacion.getBien().getDetalle().getAsignado(), ffont));
@@ -163,6 +165,8 @@ public class PDFBuilderDetalle extends AbstractITextPdfView {
 							new Phrase(String.valueOf(dateFormat.format(bien_Estacion.getActualizacion())), ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
+					
+					contador ++;
 
 				}
 				doc.add(table);

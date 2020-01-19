@@ -50,4 +50,7 @@ public interface BienesEstacionesRepository extends JpaRepository<Bienes_Estacio
 	// Buscar registro por id de estacion and alta del bien //Paginado
 	Page<Bienes_Estaciones> findByEstacion_IdAndBien_Alta(int idEstacion, String alta, Pageable page);
 
+	// Buscar registro por id de estacion and alta del bien orden Descendente
+	List<Bienes_Estaciones> findByEstacion_IdAndBien_AltaOrderByIdDesc(int idEstacion, String alta);
+
 }

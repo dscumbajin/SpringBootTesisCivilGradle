@@ -23,6 +23,7 @@ import uce.edu.ec.app.model.Bien;
 public class ExcelBuilder extends AbstractXlsView {
 
 	private Date name = new Date();
+	private int contador = 1;
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -61,7 +62,7 @@ public class ExcelBuilder extends AbstractXlsView {
 		titlerow.createCell(1).setCellValue("");
 		titlerow.createCell(2).setCellValue("");
 		titlerow.createCell(3).setCellValue("");
-		
+
 		titlerow.createCell(6).setCellValue("UNIVERSIDAD CENTRAL DEL ECUADOR");
 		titlerow.getCell(6).setCellStyle(headerStyle1);
 
@@ -69,7 +70,7 @@ public class ExcelBuilder extends AbstractXlsView {
 		titlerow.createCell(0).setCellValue("");
 		titlerow.createCell(1).setCellValue("");
 		titlerow.createCell(2).setCellValue("");
-		
+
 		titlerow.createCell(6).setCellValue("FACULTAD DE INGENIERÍA, CIENCIAS FÍSICAS Y MATEMÁTICA");
 		titlerow.getCell(6).setCellStyle(headerStyle1);
 
@@ -77,7 +78,7 @@ public class ExcelBuilder extends AbstractXlsView {
 		titlerow.createCell(0).setCellValue("");
 		titlerow.createCell(1).setCellValue("");
 		titlerow.createCell(2).setCellValue("");
-	
+
 		titlerow.createCell(6).setCellValue("CARRERA DE INGENIERÍA CIVIL - REGISTRO DE BIENES");
 		titlerow.getCell(6).setCellStyle(headerStyle1);
 
@@ -88,7 +89,6 @@ public class ExcelBuilder extends AbstractXlsView {
 		titlerow.createCell(3).setCellValue("");
 		titlerow.createCell(4).setCellValue("");
 		titlerow.createCell(5).setCellValue("");
-	
 
 		Row headerRow = sheet.createRow(4);
 		headerRow.createCell(0).setCellValue("ID");
@@ -134,7 +134,7 @@ public class ExcelBuilder extends AbstractXlsView {
 		try {
 			for (Bien bien : bienes) {
 				Row dataRow = sheet.createRow(row++);
-				dataRow.createCell(0).setCellValue(bien.getId());
+				dataRow.createCell(0).setCellValue(contador);
 				dataRow.createCell(1).setCellValue(bien.getAlta());
 				dataRow.createCell(2).setCellValue(bien.getAnterior());
 				dataRow.createCell(3).setCellValue(bien.getDescripcion());
@@ -153,7 +153,7 @@ public class ExcelBuilder extends AbstractXlsView {
 				dataRow.createCell(17).setCellValue(bien.getDetalle().getTipo());
 				dataRow.createCell(18).setCellValue(bien.getDetalle().getGuarda_almacen());
 				dataRow.createCell(19).setCellValue(bien.getDetalle().getCausionado());
-
+				contador++;
 			}
 
 		} catch (Exception e) {

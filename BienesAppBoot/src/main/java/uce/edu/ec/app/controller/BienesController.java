@@ -78,6 +78,8 @@ public class BienesController {
 
 	private List<Bien> bienesPorPeriodo;
 
+	private List<Bien> bienesBuscados = null;
+
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 	/**
@@ -107,14 +109,19 @@ public class BienesController {
 		if (busqueda == "") {
 			// Todos los registros
 			Page<Bien> lista = serviceBienes.buscarTodas(page);
+			bienesBuscados = serviceBienes.buscarTodas();
 			model.addAttribute("bienes", lista);
 		} else {
-			// Formulario con registro buscado
+			// Formulario con registro buscados
 			Page<Bien> lista = serviceBienes.search(token, page);
+			
 			if (lista.isEmpty()) {
+				bienesBuscados = lista.getContent();
 				model.addAttribute("alerta", mensajeNoExiste + token);
 				busqueda = "";
 			} else {
+				List<Bien> reporte = serviceBienes.searchSinPaginar(token);
+				bienesBuscados = reporte;
 				model.addAttribute("bienes", lista);
 				busqueda = "";
 			}
@@ -240,6 +247,7 @@ public class BienesController {
 
 		if (edicion == "") {
 			// Nuevo Bien
+			// Controla repetidos
 			if (serviceBienes.existeRegistroPorALta(alta)) {
 				model.addAttribute("alerta", mensajeRepetidoAltaNueva + alta);
 				return "bienes/formBien";
@@ -247,6 +255,7 @@ public class BienesController {
 				model.addAttribute("alerta", mensajeRepetidoAltaAnterior + anterior);
 				return "bienes/formBien";
 			} else {
+				// Guarda sin Comporovacion
 				serviceDetalles.insertar(bien.getDetalle());
 				serviceBienes.insertar(bien);
 				attributes.addFlashAttribute("mensaje", mensajeGuardar);
@@ -306,12 +315,20 @@ public class BienesController {
 		return "redirect:/bienes/indexPaginate";
 	}
 
-	@GetMapping(value = "/cancel")
+	@GetMapping(value = "/cancelReporte")
 	public String mostrarAcerca() {
 		busqueda = "";
 		paginado = "";
 		bienesPorPeriodo = null;
 		return "redirect:/admin/index";
+	}
+
+	@GetMapping(value = "/cancel")
+	public String mostrarLista() {
+		busqueda = "";
+		paginado = "";
+		bienesPorPeriodo = null;
+		return "redirect:/bienes/indexPaginate";
 	}
 
 	@GetMapping(value = "/personalizado")
@@ -349,7 +366,7 @@ public class BienesController {
 	@GetMapping(value = "/downloadTotal")
 	public ModelAndView getReport(HttpServletRequest request, HttpServletResponse response) {
 		String reportType = request.getParameter("type");
-		List<Bien> bienes = serviceBienes.buscarTodas();
+		List<Bien> bienes = bienesBuscados;
 		if (reportType != null && reportType.equals("excel")) {
 			return new ModelAndView(new ExcelBuilder(), "bienes", bienes);
 

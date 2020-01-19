@@ -106,4 +106,10 @@ public class BienesServiceJPA implements IBienService {
 		return bienesRepo.findByAnterior(alta);
 	}
 
+	@Override
+	public List<Bien> searchSinPaginar(String input) {
+
+		return bienesRepo.findByInputSinPaginar(input);
+	}
+
 }
