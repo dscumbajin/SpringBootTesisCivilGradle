@@ -32,7 +32,6 @@ public class Bien implements Serializable {
 	private Date fecha_ingreso;
 	private Double costo = 0.0;
 	private int vida_util;
-	private int depreciacion;
 	private Date garantia;
 	private String color;
 	private String material;
@@ -155,19 +154,11 @@ public class Bien implements Serializable {
 		this.control = control;
 	}
 
-	public int getDepreciacion() {
-		return depreciacion;
-	}
-
-	public void setDepreciacion(int depreciacion) {
-		this.depreciacion = depreciacion;
-	}
-
 	@Override
 	public String toString() {
 		return "Bien [id=" + id + ", alta=" + alta + ", anterior=" + anterior + ", descripcion=" + descripcion
 				+ ", serie=" + serie + ", fecha_ingreso=" + fecha_ingreso + ", costo=" + costo + ", vida_util="
-				+ vida_util + ", depreciacion=" + depreciacion + ", garantia=" + garantia + ", color=" + color
+				+ vida_util + ", garantia=" + garantia + ", color=" + color
 				+ ", material=" + material + ", control=" + control + ", detalle=" + detalle + "]";
 	}
 

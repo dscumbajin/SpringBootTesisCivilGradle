@@ -67,7 +67,7 @@
 				<form:hidden path="alta" />
 				<form:hidden path="anterior" />
 				<form:hidden path="control" />
-				
+
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="alta">Alta Nueva</label>
@@ -125,26 +125,12 @@
 
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="depresiacion" class="control-label">Depreciación</label>
-						<form:select id="depreciacion" path="depreciacion"
-							class="form-control">
-							<form:option value="1">1 Años</form:option>
-							<form:option value="2">2 Años</form:option>
-							<form:option value="3">3 Años</form:option>
-							<form:option value="5">5 Años</form:option>
-							<form:option value="10">10 Años</form:option>
-						</form:select>
-					</div>
-				</div>
-
-				<div class="col-sm-3">
-					<div class="form-group">
 						<label for="garantia">Fin de Garantia</label>
 						<form:input type="text" class="form-control" path="garantia"
 							id="garantia" required="required" autocomplete="off" />
 					</div>
 				</div>
-				
+
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="fecha_ingreso">Fecha de Ingreso</label>
@@ -233,8 +219,15 @@
 					<div class="form-group">
 						<label for="tipo" class="control-label">Tipo</label>
 						<form:select id="tipo" path="detalle.tipo" class="form-control">
-							<form:option value="MOBILIARIO"> MOBILIARIO</form:option>
-							<form:option value="MAQUINARIA Y EQUIPO"> MAQUINARIA Y EQUIPO</form:option>
+							<form:option value="BIENES SUJETOS A CONTROL"> BIENES SUJETOS A CONTROL</form:option>
+							<form:option value="EQUIPO ELECTRÓNICO"> EQUIPO ELECTRONICO </form:option>
+							<form:option value="EQUIPO DE OFICINA Y ADMINISTRACIÓN"> EQUIPO DE OFICINA Y ADMINISTRACIÓN </form:option>
+							<form:option value="EQUIPOS DE PRENSA; RADIO Y TELEVISION"> EQUIPOS DE PRENSA; RADIO Y TELEVISION </form:option>
+							<form:option value="EQUIPOS DE SEGURIDAD; VIGILANCIA Y CONTROL"> EQUIPOS DE SEGURIDAD; VIGILANCIA Y CONTROL </form:option>
+							<form:option value="MUEBLES DE OFICINA"> MUEBLES DE OFICINA </form:option>
+							<form:option value="MUEBLES DE USO EDUCATIVO Y ESCOLAR"> MUEBLES DE USO EDUCATIVO Y ESCOLAR </form:option>
+							<form:option value="MUEBLES DE USO INDUSTRIAL"> MUEBLES DE USO INDUSTRIAL </form:option>
+							<form:option value="PUPITRE"> PUPITRE </form:option>
 						</form:select>
 					</div>
 				</div>
@@ -262,7 +255,9 @@
 
 			<div class="btn-toolbar" role="toolbar">
 				<div class="btn-group">
-					<button type="submit" title="Guardar" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+					<button type="submit" title="Guardar" class="btn btn-primary">
+						<i class="fa fa-save"></i> Guardar
+					</button>
 				</div>
 
 				<div class="btn-group">

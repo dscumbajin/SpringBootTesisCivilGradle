@@ -63,10 +63,10 @@ public class PDFBuilderDetalle extends AbstractITextPdfView {
 
 			}
 
-			PdfPTable table = new PdfPTable(13);
+			PdfPTable table = new PdfPTable(14);
 			table.setWidthPercentage(100.0f);
 			table.setWidths(
-					new float[] { 1.0f, 1.0f, 1.0f, 2.0f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f });
+					new float[] { 1.0f, 1.0f, 1.0f, 1.0f, 2.0f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f });
 			table.setSpacingBefore(10);
 			table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
 			// define font for table header row
@@ -87,6 +87,8 @@ public class PDFBuilderDetalle extends AbstractITextPdfView {
 			cell.setPadding(10.0f);
 			cell.setBackgroundColor(new BaseColor(30, 144, 255));
 			// write table header
+			cell.setPhrase(new Phrase("N°", font));
+			table.addCell(cell);
 			cell.setPhrase(new Phrase("Persona Usa", font));
 			table.addCell(cell);
 			cell.setPhrase(new Phrase("Alta Nueva", font));
@@ -117,6 +119,9 @@ public class PDFBuilderDetalle extends AbstractITextPdfView {
 			// write table row data
 			try {
 				for (Bienes_Estaciones bien_Estacion : bienes_Estaciones) {
+					cell = new PdfPCell(new Phrase(String.valueOf(bien_Estacion.getId()), ffont));
+					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+					table.addCell(cell);
 					cell = new PdfPCell(new Phrase(bien_Estacion.getBien().getDetalle().getAsignado(), ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
@@ -150,10 +155,12 @@ public class PDFBuilderDetalle extends AbstractITextPdfView {
 					cell = new PdfPCell(new Phrase(bien_Estacion.getEstacion().getLugar(), ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
-					cell = new PdfPCell(new Phrase(String.valueOf(dateFormat.format(bien_Estacion.getRegistro())), ffont));
+					cell = new PdfPCell(
+							new Phrase(String.valueOf(dateFormat.format(bien_Estacion.getRegistro())), ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
-					cell = new PdfPCell(new Phrase(String.valueOf(dateFormat.format(bien_Estacion.getActualizacion())), ffont));
+					cell = new PdfPCell(
+							new Phrase(String.valueOf(dateFormat.format(bien_Estacion.getActualizacion())), ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
 

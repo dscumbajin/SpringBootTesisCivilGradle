@@ -18,6 +18,8 @@
 <spring:url value="/asignaciones/delete" var="urlDelete" />
 <spring:url value="/asignaciones" var="urlAsignaciones" />
 <spring:url value="/asignaciones/search" var="urlSearch" />
+<spring:url value="/asignaciones/downloadTotalDetalle?type=excel" var="urlXLSDetalle"></spring:url>
+<spring:url value="/asignaciones/downloadTotalDetalle?type=pdf" var="urlPDFDetalle" />
 
 <link href="${urlPublic}/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -40,7 +42,7 @@
 		<c:if test="${alerta!=null}">
 			<div class='alert alert-danger' role="alert">${alerta}</div>
 		</c:if>
-		
+
 		<div class="col-lg-12">
 			<h2 class="text text-center">
 				<span class="label label-success">Listado de Asignaciones</span> <br>
@@ -53,6 +55,21 @@
 			Nueva Asignación</a><br> <br>
 
 
+		<div class="btn-toolbar" role="toolbar">
+
+			<div class="btn-group">
+				<a href="${urlPDFDetalle} " class="btn btn-outline-dark"
+					role="button" title="Reporte en Pdf"> Reportes Pdf <i
+					class="fa fa-file-pdf-o" style="font-size: 24px; color: red"></i></a>
+			</div>
+			<div class="btn-group">
+				<a href="${urlXLSDetalle} " class="btn btn-outline-dark"
+					role="button" title="Reporte en Excel">Reportes Excel <i
+					class="fa fa-file-excel-o" style="font-size: 24px; color: green;"></i></a>
+			</div>
+
+		</div>
+		<br>
 
 		<div class="panel panel-default">
 			<div class="panel-heading">

@@ -4,6 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import uce.edu.ec.app.model.Bien;
@@ -29,6 +33,8 @@ import uce.edu.ec.app.model.Estacion;
 import uce.edu.ec.app.service.IBienService;
 import uce.edu.ec.app.service.IBienes_Estaciones;
 import uce.edu.ec.app.service.IEstacionService;
+import uce.edu.ec.app.util.ExcelBuilderDetalle;
+import uce.edu.ec.app.util.PDFBuilderDetalle;
 
 @Controller
 @RequestMapping(value = "/asignaciones")
@@ -226,6 +232,22 @@ public class BienesEstacionesController {
 		token = campo;
 		return "redirect:/asignaciones/indexPaginate";
 	}
+	
+	// Reporte de asignaciones 
+		@GetMapping(value = "/downloadTotalDetalle")
+		public ModelAndView getReport(HttpServletRequest request, HttpServletResponse response) {
+			String reportType = request.getParameter("type");
+			// Todos los bienes pero por id de estacion
+			List<Bienes_Estaciones> bienes_Estaciones = servicioBienesEstaciones.buscarTodos();
+
+			if (reportType != null && reportType.equals("excel")) {
+				return new ModelAndView(new ExcelBuilderDetalle(), "bienes_Estaciones", bienes_Estaciones);
+
+			} else if (reportType != null && reportType.equals("pdf")) {
+				return new ModelAndView(new PDFBuilderDetalle(), "bienes_Estaciones", bienes_Estaciones);
+			}
+			return new ModelAndView("detalle", "bienes_Estaciones", bienes_Estaciones);
+		}
 
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {

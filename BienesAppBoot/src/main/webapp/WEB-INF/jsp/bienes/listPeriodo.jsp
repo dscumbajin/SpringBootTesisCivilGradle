@@ -118,7 +118,6 @@
 								<th>Fecha de Ingreso</th>
 								<th>Costo</th>
 								<th>Vida Util</th>
-								<th>Depreciación</th>
 								<th>Fecha Garantía</th>
 								<th>Color</th>
 								<th>Material</th>
@@ -142,7 +141,6 @@
 										pattern="dd-MM-yyyy" /></td>
 								<td>${bien.costo }</td>
 								<td>${bien.vida_util }<span>años</span></td>
-								<td>${bien.depreciacion }<span>años</span></td>
 								<td><fmt:formatDate value="${bien.garantia}"
 										pattern="dd-MM-yyyy" /></td>
 								<td>${bien.color}</td>

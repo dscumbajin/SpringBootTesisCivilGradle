@@ -65,9 +65,11 @@ public class Estacion implements Serializable{
 		this.imagen = imagen;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Estacion [id=" + id + ", ubicacion=" + ubicacion + ", lugar=" + lugar + ", imagen=" + imagen + "]";
 	}
+
 
 }

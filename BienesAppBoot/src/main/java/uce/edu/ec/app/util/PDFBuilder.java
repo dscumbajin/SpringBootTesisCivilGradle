@@ -69,7 +69,7 @@ public class PDFBuilder extends AbstractITextPdfView {
 
 			PdfPTable table = new PdfPTable(19);
 			table.setWidthPercentage(100.0f);
-			table.setWidths(new float[] { 1.3f, 1.3f, 2.1f, 2.8f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.5f, 2.1f,
+			table.setWidths(new float[] {1f, 1.3f, 1.3f, 2.1f, 2.8f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.3f, 1.5f, 2.1f,
 					1.3f, 1.3f, 2.1f, 1.3f, 1.3f, 2.1f });
 			table.setSpacingBefore(10);
 			table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -90,6 +90,8 @@ public class PDFBuilder extends AbstractITextPdfView {
 			cell.setPadding(2.0f);
 			cell.setBackgroundColor(new BaseColor(30, 144, 255));
 			// write table header
+			cell.setPhrase(new Phrase("N°", font));
+			table.addCell(cell);
 			cell.setPhrase(new Phrase("Alta Nueva", font));
 			table.addCell(cell);
 			cell.setPhrase(new Phrase("Alta Anterior", font));
@@ -103,8 +105,6 @@ public class PDFBuilder extends AbstractITextPdfView {
 			cell.setPhrase(new Phrase("Costo", font));
 			table.addCell(cell);
 			cell.setPhrase(new Phrase("Vida Útil", font));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase("Depreciación", font));
 			table.addCell(cell);
 			cell.setPhrase(new Phrase("Fin de Garantia", font));
 			table.addCell(cell);
@@ -132,6 +132,9 @@ public class PDFBuilder extends AbstractITextPdfView {
 			try {
 				// write table row data
 				for (Bien bien : bienes) {
+					cell = new PdfPCell(new Phrase(String.valueOf(bien.getId()), ffont));
+					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
+					table.addCell(cell);
 					cell = new PdfPCell(new Phrase(bien.getAlta(), ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
@@ -151,9 +154,6 @@ public class PDFBuilder extends AbstractITextPdfView {
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
 					cell = new PdfPCell(new Phrase(String.valueOf(bien.getVida_util()) + " años", ffont));
-					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
-					table.addCell(cell);
-					cell = new PdfPCell(new Phrase(String.valueOf(bien.getDepreciacion()) + " años", ffont));
 					cell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
 					table.addCell(cell);
 					cell = new PdfPCell(new Phrase(String.valueOf(dateFormat.format(bien.getGarantia())), ffont));
