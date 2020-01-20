@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>CineSite | Bienvenido</title>
+<title>My Control Site | Bienvenido</title>
 <spring:url value="" var="urlPublic" />
 <link href="${urlPublic}/images/logouce.ico.ico" type="image/x-icon" rel="shortcut icon"/>
 <link href="${urlPublic}/bootstrap/css/bootstrap.min.css"
@@ -25,7 +25,7 @@
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">ACERCA DE ESTA APLICACION</h3>
+				<h3 class="panel-title">ACERCA DE ESTA APLICACIÓN</h3>
 			</div>
 			<div class="panel-body">
 				<div class="row">
