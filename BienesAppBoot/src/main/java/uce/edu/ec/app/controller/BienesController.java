@@ -111,10 +111,10 @@ public class BienesController {
 			Page<Bien> lista = serviceBienes.buscarTodas(page);
 			bienesBuscados = serviceBienes.buscarTodas();
 			model.addAttribute("bienes", lista);
-		} else {
+		} else if (paginado == "si") {
 			// Formulario con registro buscados
 			Page<Bien> lista = serviceBienes.search(token, page);
-			
+
 			if (lista.isEmpty()) {
 				bienesBuscados = lista.getContent();
 				model.addAttribute("alerta", mensajeNoExiste + token);
@@ -123,7 +123,6 @@ public class BienesController {
 				List<Bien> reporte = serviceBienes.searchSinPaginar(token);
 				bienesBuscados = reporte;
 				model.addAttribute("bienes", lista);
-				busqueda = "";
 			}
 
 		}
@@ -147,6 +146,7 @@ public class BienesController {
 
 			} else {
 				List<Bien> bienesLista = serviceBienes.buscarPeriodo(inicio, fin);
+				System.out.println("Estoy en el paginado de la busqueda");
 				model.addAttribute("bienes", lista);
 				bienesPorPeriodo = bienesLista;
 			}
@@ -160,6 +160,7 @@ public class BienesController {
 	public String buscar(@RequestParam("campo") String campo) {
 		System.out.println("alta: " + campo);
 		busqueda = "si";
+		paginado = "si";
 		token = campo;
 		return "redirect:/bienes/indexPaginate";
 	}
@@ -373,6 +374,7 @@ public class BienesController {
 		} else if (reportType != null && reportType.equals("pdf")) {
 			return new ModelAndView(new PDFBuilder(), "bienes", bienes);
 		}
+		bienes = null;
 		return new ModelAndView("listBienes", "bienes", bienes);
 	}
 

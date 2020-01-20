@@ -114,4 +114,9 @@ public class BienesEstacionesJPA implements IBienes_Estaciones {
 				startDate, endDate, page);
 	}
 
+	@Override
+	public List<Bienes_Estaciones> buscarPorAltaBienSinPaginar(String Alta) {
+		return bienesEstacionesRepo.findByBien_AltaOrderByIdDesc(Alta);
+	}
+
 }

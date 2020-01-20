@@ -33,6 +33,8 @@ public interface IBienes_Estaciones {
 
 	// Buscar por alta nueva  del bien
 	Page<Bienes_Estaciones> buscarPorAltaBien(String Alta, Pageable page);
+	
+	List<Bienes_Estaciones> buscarPorAltaBienSinPaginar(String Alta);
 
 	// Buscar por alta anterior del bien
 	Page<Bienes_Estaciones> buscarPorAltaAnteriorBien(String anterior, Pageable page);

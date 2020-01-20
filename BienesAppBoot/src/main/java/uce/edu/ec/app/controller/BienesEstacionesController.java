@@ -68,9 +68,12 @@ public class BienesEstacionesController {
 
 	private String busqueda = "";
 
-	private String token = "";
+	private String paginado = "";
 
+	private String token = "";
 	
+	private List<Bienes_Estaciones> bienesBuscados = null;
+
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
 	@GetMapping(value = "/index")
@@ -85,17 +88,21 @@ public class BienesEstacionesController {
 
 		if (busqueda == "") {
 			Page<Bienes_Estaciones> listaAsignaciones = servicioBienesEstaciones.buscarTodos(page);
+			bienesBuscados = servicioBienesEstaciones.buscarPorAltaBienSinPaginar(token);
 			model.addAttribute("asignaciones", listaAsignaciones);
 
-		} else {
+		} else if (paginado == "si") {
 			Page<Bienes_Estaciones> listaAsignaciones = servicioBienesEstaciones.buscarPorAltaBien(token, page);
 			if (listaAsignaciones.isEmpty()) {
+				bienesBuscados=listaAsignaciones.getContent();
 				model.addAttribute("alerta", mensajeNoExiste + token);
 				busqueda = "";
 			} else {
+				List<Bienes_Estaciones> reporte = servicioBienesEstaciones.buscarPorAltaBienSinPaginar(token);
+				bienesBuscados=reporte;
 				model.addAttribute("asignaciones", listaAsignaciones);
-				busqueda = "";
 			}
+			
 
 		}
 		return "asignaciones/listAsignaciones";
@@ -229,25 +236,26 @@ public class BienesEstacionesController {
 	public String buscar(@RequestParam("campo") String campo) {
 		System.out.println("alta: " + campo);
 		busqueda = "si";
+		paginado = "si";
 		token = campo;
 		return "redirect:/asignaciones/indexPaginate";
 	}
-	
-	// Reporte de asignaciones 
-		@GetMapping(value = "/downloadTotalDetalle")
-		public ModelAndView getReport(HttpServletRequest request, HttpServletResponse response) {
-			String reportType = request.getParameter("type");
-			// Todos los bienes pero por id de estacion
-			List<Bienes_Estaciones> bienes_Estaciones = servicioBienesEstaciones.buscarTodos();
 
-			if (reportType != null && reportType.equals("excel")) {
-				return new ModelAndView(new ExcelBuilderDetalle(), "bienes_Estaciones", bienes_Estaciones);
+	// Reporte de asignaciones
+	@GetMapping(value = "/downloadTotalDetalle")
+	public ModelAndView getReport(HttpServletRequest request, HttpServletResponse response) {
+		String reportType = request.getParameter("type");
+		// Todos los bienes pero por id de estacion
+		List<Bienes_Estaciones> bienes_Estaciones = bienesBuscados;
 
-			} else if (reportType != null && reportType.equals("pdf")) {
-				return new ModelAndView(new PDFBuilderDetalle(), "bienes_Estaciones", bienes_Estaciones);
-			}
-			return new ModelAndView("detalle", "bienes_Estaciones", bienes_Estaciones);
+		if (reportType != null && reportType.equals("excel")) {
+			return new ModelAndView(new ExcelBuilderDetalle(), "bienes_Estaciones", bienes_Estaciones);
+
+		} else if (reportType != null && reportType.equals("pdf")) {
+			return new ModelAndView(new PDFBuilderDetalle(), "bienes_Estaciones", bienes_Estaciones);
 		}
+		return new ModelAndView("detalle", "bienes_Estaciones", bienes_Estaciones);
+	}
 
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
