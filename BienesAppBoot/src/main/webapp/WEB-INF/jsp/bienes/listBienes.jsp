@@ -12,6 +12,7 @@
 <title>Listado de Bienes</title>
 <spring:url value="" var="urlPublic" />
 <spring:url value="/bienes/create" var="urlCreate" />
+<spring:url value="/bienes/listarTodos" var="urlListarTodos" />
 <spring:url value="/bienes/edit" var="urlEdit" />
 <spring:url value="/bienes/delete" var="urlDelete" />
 <spring:url value="/bienes/search" var="urlSearch" />
@@ -99,7 +100,11 @@
 					<button type="submit" title="Buscar" class="btn btn-primary">
 						<i class="fa fa-search"></i> Buscar
 					</button>
+					
+					<a href="${urlListarTodos} " class="btn btn-outline-dark"
+					role="button" title="Reporte en Excel">Listar Todo </a>
 				</form>
+				
 			</div>
 			<div class="panel-body">
 

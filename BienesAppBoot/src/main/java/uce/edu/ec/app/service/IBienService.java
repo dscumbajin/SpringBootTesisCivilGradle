@@ -19,7 +19,7 @@ public interface IBienService {
 
 	// busqueda por alta nueva
 	Bien buscarPorAlta(String alta);
-	
+
 	// Busqueda por alta anterior
 	Bien buscarPorAltaAnterior(String alta);
 
@@ -34,7 +34,7 @@ public interface IBienService {
 
 	// Buscar Bien por input paginado
 	Page<Bien> search(String input, Pageable page);
-	
+
 	// Buscar Bien por input sin paginar
 	List<Bien> searchSinPaginar(String input);
 
@@ -58,5 +58,12 @@ public interface IBienService {
 
 	// Para buscar todos los bienes que no estan asignados
 	List<Bien> sinAsignacion();
+
+	// Lista de tipos de bienes
+	List<String> buscarTipo();
+
+	// Lista quien usa
+	List<String> quienUsa();
+	
 
 }

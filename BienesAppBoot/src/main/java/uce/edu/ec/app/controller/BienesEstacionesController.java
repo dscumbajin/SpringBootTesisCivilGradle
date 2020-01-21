@@ -71,7 +71,7 @@ public class BienesEstacionesController {
 	private String paginado = "";
 
 	private String token = "";
-	
+
 	private List<Bienes_Estaciones> bienesBuscados = null;
 
 	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -94,15 +94,14 @@ public class BienesEstacionesController {
 		} else if (paginado == "si") {
 			Page<Bienes_Estaciones> listaAsignaciones = servicioBienesEstaciones.buscarPorAltaBien(token, page);
 			if (listaAsignaciones.isEmpty()) {
-				bienesBuscados=listaAsignaciones.getContent();
+				bienesBuscados = listaAsignaciones.getContent();
 				model.addAttribute("alerta", mensajeNoExiste + token);
 				busqueda = "";
 			} else {
 				List<Bienes_Estaciones> reporte = servicioBienesEstaciones.buscarPorAltaBienSinPaginar(token);
-				bienesBuscados=reporte;
+				bienesBuscados = reporte;
 				model.addAttribute("asignaciones", listaAsignaciones);
 			}
-			
 
 		}
 		return "asignaciones/listAsignaciones";
@@ -110,6 +109,8 @@ public class BienesEstacionesController {
 
 	@GetMapping(value = "/create")
 	public String crear(@ModelAttribute Bienes_Estaciones bienes_Estaciones, Model model) {
+		paginado = "";
+		bienesBuscados = null;
 		return "asignaciones/formAsignaciones";
 	}
 
@@ -147,7 +148,7 @@ public class BienesEstacionesController {
 					System.out.println(bien.toString());
 					servicioBienesEstaciones.insertar(bienes_Estaciones);
 					attributes.addFlashAttribute("mensaje", mensajeGuardar + " del " + "Bien: " + bien.getDescripcion()
-							+ "con Alta: " + bien.getAlta() + " en " + estacion.getLugar());
+							+ " con Alta: " + bien.getAlta() + " en " + estacion.getLugar());
 					// redireccionamos a un nuevo formmulario
 					return "redirect:/asignaciones/indexPaginate";
 				}
@@ -213,6 +214,7 @@ public class BienesEstacionesController {
 
 	@ModelAttribute("bienesControl")
 	public List<Bien> getBienesActivo() {
+
 		return servicioBienes.sinAsignacion();
 	}
 
@@ -227,7 +229,16 @@ public class BienesEstacionesController {
 	}
 
 	@RequestMapping(value = "/cancel")
-	public String mostrarAcerca() {
+	public String mostrarCancelar() {
+		busqueda = "";
+		paginado = "";
+		return "redirect:/asignaciones/indexPaginate";
+	}
+	
+	@GetMapping(value = "/listarTodos")
+	public String mostrarTodos() {
+		busqueda = "";
+		paginado = "";
 		return "redirect:/asignaciones/indexPaginate";
 	}
 

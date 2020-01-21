@@ -156,10 +156,16 @@ public class Bien implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Bien [id=" + id + ", alta=" + alta + ", anterior=" + anterior + ", descripcion=" + descripcion
-				+ ", serie=" + serie + ", fecha_ingreso=" + fecha_ingreso + ", costo=" + costo + ", vida_util="
-				+ vida_util + ", garantia=" + garantia + ", color=" + color
-				+ ", material=" + material + ", control=" + control + ", detalle=" + detalle + "]";
+		return " Alta nueva:" + alta + ", Alta Anterior:" + anterior + ", descripcion:" + descripcion + ", serie:"
+				+ serie + "\n";
 	}
+	/*
+	 * @Override public String toString() { return "Bien [id=" + id + ", alta=" +
+	 * alta + ", anterior=" + anterior + ", descripcion=" + descripcion + ", serie="
+	 * + serie + ", fecha_ingreso=" + fecha_ingreso + ", costo=" + costo +
+	 * ", vida_util=" + vida_util + ", garantia=" + garantia + ", color=" + color +
+	 * ", material=" + material + ", control=" + control + ", detalle=" + detalle +
+	 * "]"; }
+	 */
 
 }

@@ -169,10 +169,7 @@
 					<div class="form-group">
 						<label for="asignado" class="control-label">Quien Usa</label>
 						<form:select id="asignado" path="detalle.asignado"
-							class="form-control">
-							<form:option value="Estudiante"> Estudiante</form:option>
-							<form:option value="Profesor"> Profesor</form:option>
-							<form:option value="Administrativo"> Administrativo</form:option>
+							class="form-control" items="${usuario}">
 						</form:select>
 					</div>
 				</div>
@@ -218,18 +215,8 @@
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="tipo" class="control-label">Tipo</label>
-						<form:select id="tipo" path="detalle.tipo" class="form-control">
-							<form:option value="BIENES SUJETOS A CONTROL"> BIENES SUJETOS A CONTROL</form:option>
-							<form:option value="EQUIPO ELECTRÓNICO"> EQUIPO ELECTRONICO </form:option>
-							<form:option value="EQUIPO DE OFICINA Y ADMINISTRACIÓN"> EQUIPO DE OFICINA Y ADMINISTRACIÓN </form:option>
-							<form:option value="EQUIPOS DE PRENSA - RADIO Y TELEVISION"> EQUIPOS DE PRENSA - RADIO Y TELEVISION </form:option>
-							<form:option value="EQUIPOS DE SEGURIDAD - VIGILANCIA Y CONTROL"> EQUIPOS DE SEGURIDAD - VIGILANCIA Y CONTROL </form:option>
-							<form:option value="EQUIPO Y MEDIOS DE COMUNICACION"> EQUIPO Y MEDIOS DE COMUNICACION </form:option>
-							<form:option value="MUEBLES DE OFICINA"> MUEBLES DE OFICINA </form:option>
-							<form:option value="MUEBLES DE USO EDUCATIVO Y ESCOLAR"> MUEBLES DE USO EDUCATIVO Y ESCOLAR </form:option>
-							<form:option value="MUEBLES DE USO INDUSTRIAL"> MUEBLES DE USO INDUSTRIAL </form:option>
-							<form:option value="PUPITRE"> PUPITRE </form:option>
-							<form:option value="ANAQUEL"> ANAQUEL </form:option>
+						<form:select id="tipo" path="detalle.tipo" class="form-control"
+							items="${tipo}">
 						</form:select>
 					</div>
 				</div>

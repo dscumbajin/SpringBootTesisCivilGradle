@@ -1,6 +1,7 @@
 package uce.edu.ec.app.service;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -111,5 +112,30 @@ public class BienesServiceJPA implements IBienService {
 
 		return bienesRepo.findByInputSinPaginar(input);
 	}
+
+	@Override
+	public List<String> buscarTipo() {
+		List<String> tipos = new LinkedList<>();
+		tipos.add("BIENES SUJETOS A CONTROL");
+		tipos.add("EQUIPO ELECTRONICO");
+		tipos.add("EQUIPO DE OFICINA Y ADMINISTRACION");
+		tipos.add("EQUIPOS DE PRENSA - RADIO Y TELEVISION");
+		tipos.add("EQUIPOS DE SEGURIDAD - VIGILANCIA Y CONTROL");
+		tipos.add("EQUIPO Y MEDIOS DE COMUNICACION");
+		tipos.add("MUEBLES DE OFICINA");
+		tipos.add("MUEBLES DE USO EDUCATIVO Y ESCOLAR");
+		tipos.add("MUEBLES DE USO INDUSTRIAL");
+		return tipos;
+	}
+
+	@Override
+	public List<String> quienUsa() {
+		List<String> quienUsa = new LinkedList<>();
+		quienUsa.add("Administrativo");
+		quienUsa.add("Docente");
+		quienUsa.add("Estudiante");
+		return quienUsa;
+	}
+	
 
 }

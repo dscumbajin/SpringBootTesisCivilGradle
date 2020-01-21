@@ -56,10 +56,13 @@
 
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="id_bien" class="control-label">Bien</label>
+						<label for="id_bien" class="control-label">Alta Nueva del
+							Bien</label>
 						<form:hidden path="id" />
 						<form:select id="id_bien" path="bien.id" class="form-control"
-							items="${bienesControl}" itemLabel="alta" itemValue="id" />
+							items="${bienesControl}" itemLabel="alta" itemValue="id">
+							
+						</form:select>
 					</div>
 				</div>
 

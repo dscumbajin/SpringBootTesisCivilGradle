@@ -34,7 +34,7 @@ public interface BienesEstacionesRepository extends JpaRepository<Bienes_Estacio
 			Date startDate, Date endDate);
 
 	// Lista todas las asignaciones oredenados
-	@Query(value = "SELECT * FROM BIENES_ESTACIONES be, ESTACIONES e WHERE be.id_estacion = e.id  ORDER BY e.lugar DESC, be.registro DESC ", nativeQuery = true)
+	@Query(value = "SELECT * FROM BIENES_ESTACIONES be, ESTACIONES e WHERE be.id_estacion = e.id  ORDER BY be.registro DESC", nativeQuery = true)
 	Page<Bienes_Estaciones> findAllOrdenado(Pageable page);
 
 	// Verificar si existe el registro por medio de los parametros idBien and
