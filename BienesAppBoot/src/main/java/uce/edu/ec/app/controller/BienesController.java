@@ -297,6 +297,7 @@ public class BienesController {
 				serviceAsignacion.insertar(bienes_Estaciones);
 			} catch (Exception e) {
 
+				edicion="";
 			}
 
 			attributes.addFlashAttribute("mensaje",

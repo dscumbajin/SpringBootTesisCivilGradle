@@ -88,7 +88,7 @@ public class BienesEstacionesController {
 
 		if (busqueda == "") {
 			Page<Bienes_Estaciones> listaAsignaciones = servicioBienesEstaciones.buscarTodos(page);
-			bienesBuscados = servicioBienesEstaciones.buscarPorAltaBienSinPaginar(token);
+			bienesBuscados = servicioBienesEstaciones.buscarTodos();
 			model.addAttribute("asignaciones", listaAsignaciones);
 
 		} else if (paginado == "si") {
@@ -110,7 +110,6 @@ public class BienesEstacionesController {
 	@GetMapping(value = "/create")
 	public String crear(@ModelAttribute Bienes_Estaciones bienes_Estaciones, Model model) {
 		paginado = "";
-		bienesBuscados = null;
 		return "asignaciones/formAsignaciones";
 	}
 
@@ -181,8 +180,8 @@ public class BienesEstacionesController {
 									+ reubicacion.getAlta() + " en " + lugar.getLugar());
 				}
 
-				edicion = "";
 			}
+			edicion = "";
 		} catch (Exception alerta) {
 			System.out.println("El error fue: " + attributes.addFlashAttribute("alerta", mensajeError));
 		}
@@ -232,13 +231,15 @@ public class BienesEstacionesController {
 	public String mostrarCancelar() {
 		busqueda = "";
 		paginado = "";
+		bienesBuscados = null;
 		return "redirect:/asignaciones/indexPaginate";
 	}
-	
+
 	@GetMapping(value = "/listarTodos")
 	public String mostrarTodos() {
 		busqueda = "";
 		paginado = "";
+		bienesBuscados = null;
 		return "redirect:/asignaciones/indexPaginate";
 	}
 
@@ -265,6 +266,7 @@ public class BienesEstacionesController {
 		} else if (reportType != null && reportType.equals("pdf")) {
 			return new ModelAndView(new PDFBuilderDetalle(), "bienes_Estaciones", bienes_Estaciones);
 		}
+		bienesBuscados = null;
 		return new ModelAndView("detalle", "bienes_Estaciones", bienes_Estaciones);
 	}
 
