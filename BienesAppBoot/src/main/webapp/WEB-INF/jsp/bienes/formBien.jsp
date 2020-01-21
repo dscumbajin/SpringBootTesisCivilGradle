@@ -88,14 +88,16 @@
 						<form:hidden path="id" />
 						<form:hidden path="detalle.id" />
 						<form:input type="text" class="form-control" path="alta" id="alta"
-							autocomplete="off" required="required" />
+							autocomplete="off" required="required"
+							placeholder="Al no tener, Escribir la Descripción" />
 					</div>
 				</div>
 				<div class="col-sm-3">
 					<div class="form-group">
 						<label for="anterior">Alta Anterior</label>
 						<form:input type="text" class="form-control" path="anterior"
-							id="anterior" autocomplete="off" required="required" />
+							id="anterior" autocomplete="off" required="required"
+							placeholder="Al no tener, Escribir la Descripción" />
 					</div>
 				</div>
 				<div class="col-sm-3">

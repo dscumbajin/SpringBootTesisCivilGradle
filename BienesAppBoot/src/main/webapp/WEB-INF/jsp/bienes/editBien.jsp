@@ -125,17 +125,17 @@
 
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="garantia">Fin de Garantia</label>
-						<form:input type="text" class="form-control" path="garantia"
-							id="garantia" required="required" autocomplete="off" />
+						<label for="fecha_ingreso">Fecha de Ingreso</label>
+						<form:input type="text" class="form-control" path="fecha_ingreso"
+							id="fecha_ingreso" required="required" autocomplete="off" />
 					</div>
 				</div>
 
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="fecha_ingreso">Fecha de Ingreso</label>
-						<form:input type="text" class="form-control" path="fecha_ingreso"
-							id="fecha_ingreso" required="required" autocomplete="off" />
+						<label for="garantia">Fin de Garantia</label>
+						<form:input type="text" class="form-control" path="garantia"
+							id="garantia" required="required" autocomplete="off" />
 					</div>
 				</div>
 
